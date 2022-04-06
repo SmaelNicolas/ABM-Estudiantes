@@ -18,7 +18,7 @@
                         mayor a 15 numeros</mat-error>
                     <mat-error *ngIf="checkStudentForm.get('id')?.errors?.['pattern']" selected>Documento deben ser solo
                         numeros</mat-error>
-                    <mat-error *ngIf="!validStudent">No existe estudiante con ese ID</mat-error>
+                    <mat-hint *ngIf="!validStudent">No existe estudiante con ese ID</mat-hint>
 
                 </mat-form-field>
             </div>
