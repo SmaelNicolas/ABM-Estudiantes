@@ -5,9 +5,12 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+
 import { Student } from 'src/app/class/student';
 import { DataPeople } from 'src/app/class/data';
 import { Courses } from 'src/app/class/courses';
+import { CreateStudentDialogComponent } from '../create-student-dialog/create-student-dialog.component';
 
 @Component({
   selector: 'app-create-student',
@@ -18,12 +21,13 @@ export class CreateStudentComponent implements OnInit {
   createStudentForm!: FormGroup;
   coursesList: Courses[] = DataPeople.getCoursesListAvailable();
 
-  constructor(public studentAddForm: FormBuilder) {
+  constructor(public studentAddForm: FormBuilder, public dialog: MatDialog) {
     this.createStudentForm = this.studentAddForm.group({
       id: new FormControl('', [
         Validators.required,
         this.noWhitespaceValidator,
-        Validators.minLength(3),
+        this.noDuplicateIdValidator,
+        Validators.minLength(7),
         Validators.maxLength(15),
         Validators.pattern('[0-9]*'),
       ]),
@@ -54,13 +58,31 @@ export class CreateStudentComponent implements OnInit {
   ngOnInit(): void {}
 
   public noWhitespaceValidator(control: FormControl) {
-    const isWhitespace = (control.value || '').trim().length === 0;
-    const isValid = !isWhitespace;
+    let isWhitespace = (control.value || '').trim().length === 0;
+    let isValid = !isWhitespace;
     return isValid ? null : { whitespace: true };
   }
 
+  public noDuplicateIdValidator(control: FormControl) {
+    let isDuplicate = DataPeople.alreadyStudent(parseInt(control.value));
+    let isValid = !isDuplicate;
+    return isValid ? null : { duplicate: true };
+  }
+
+  openDialog(s: Student) {
+    this.dialog.open(CreateStudentDialogComponent, {
+      data: {
+        name: s.name,
+        lastName: s.lastName,
+        email: s.email,
+        id: s.id,
+        course: s.courses,
+      },
+    });
+  }
+
   saveStudent() {
-    let id: number = this.createStudentForm.get('id')!.value;
+    let id: number = parseInt(this.createStudentForm.get('id')!.value);
     let name: string = this.createStudentForm.get('name')!.value;
     let lastName: string = this.createStudentForm.get('lastName')!.value;
     let email: string = this.createStudentForm.get('email')!.value;
@@ -76,9 +98,8 @@ export class CreateStudentComponent implements OnInit {
       password,
       course
     );
-    console.log(DataPeople.studentList);
     DataPeople.addStudent(studentToAdd);
+    this.openDialog(studentToAdd);
     this.createStudentForm.reset();
-    console.log(DataPeople.studentList);
   }
 }
