@@ -1,0 +1,97 @@
+<div class="modifyStudentContainer">
+    <h2>Modificar Estudiante</h2>
+    <div class="modifyStudentFormContainer">
+
+        <form *ngIf="!modify" [formGroup]="checkStudentForm" class="modifyStudentForm" (ngSubmit)="canModify()">
+            <div>
+                <mat-form-field appearance="fill">
+                    <mat-label for="id">Documento</mat-label>
+                    <input matInput type="text" id="id" formControlName="id">
+
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['required']" selected>Documento es
+                        requerido</mat-hint>
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['noWhitespaceValidator']" selected>
+                        Documento no puede ser vacio</mat-hint>
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['minlength']" selected>Documento es
+                        menor a 7 numeros</mat-hint>
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['maxlength']" selected>Documento es
+                        mayor a 15 numeros</mat-hint>
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['pattern']" selected>Documento deben ser solo
+                        numeros</mat-hint>
+                    <mat-hint *ngIf="!validStudent">No existe estudiante con ese ID</mat-hint>
+
+                </mat-form-field>
+            </div>
+            <button mat-raised-button color="primary" type="submit"
+                [disabled]="!checkStudentForm.valid">Modificar</button>
+        </form>
+
+        <form *ngIf="modify" [formGroup]="modifyStudentForm" class="modifyStudentForm" (ngSubmit)="updateStudent()">
+            <div class="modifyStudentsInputs">
+                <mat-form-field appearance="fill">
+                    <mat-label for="name">Nombre </mat-label>
+                    <input matInput type="text" id="name" formControlName="name" placeholder="Nombre">
+
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['required']" selected>Documento es
+                        requerido</mat-hint>
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['noWhitespaceValidator']" selected>
+                        Documento no puede ser vacio</mat-hint>
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['minlength']" selected>Documento es
+                        menor a 7 numeros</mat-hint>
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['maxlength']" selected>Documento es
+                        mayor a 15 numeros</mat-hint>
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['pattern']" selected>Documento deben ser solo
+                        numeros</mat-hint>
+                    <mat-hint *ngIf="!validStudent">No existe estudiante con ese ID</mat-hint>
+
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label for="lastName">Apellido</mat-label>
+                    <input matInput type="text" id="lastName" formControlName="lastName" placeholder="Apellido">
+
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['required']" selected>Documento es
+                        requerido</mat-hint>
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['noWhitespaceValidator']" selected>
+                        Documento no puede ser vacio</mat-hint>
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['minlength']" selected>Documento es
+                        menor a 7 numeros</mat-hint>
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['maxlength']" selected>Documento es
+                        mayor a 15 numeros</mat-hint>
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['pattern']" selected>Documento deben ser solo
+                        numeros</mat-hint>
+                    <mat-hint *ngIf="!validStudent">No existe estudiante con ese ID</mat-hint>
+
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label for="email">Email </mat-label>
+                    <input matInput type="email" id="email" formControlName="email" placeholder="Email@example.com">
+
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['required']" selected>Documento es
+                        requerido</mat-hint>
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['noWhitespaceValidator']" selected>
+                        Documento no puede ser vacio</mat-hint>
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['minlength']" selected>Documento es
+                        menor a 7 numeros</mat-hint>
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['maxlength']" selected>Documento es
+                        mayor a 15 numeros</mat-hint>
+                    <mat-hint *ngIf="checkStudentForm.get('id')?.errors?.['pattern']" selected>Documento deben ser solo
+                        numeros</mat-hint>
+                    <mat-hint *ngIf="!validStudent">No existe estudiante con ese ID</mat-hint>
+                </mat-form-field>
+                <section class="modifyStudentChecksContainer" [formGroup]="newFormCourses">
+                    <h4>Seleccionar los cursos a inscribir o desuscribir</h4>
+                    <p *ngFor="let course of courses">
+                        <mat-checkbox *ngIf="course.isAvailable" [formControlName]="course.name ">
+                            {{course.name | uppercase}}
+                        </mat-checkbox>
+                    </p>
+
+                </section>
+
+            </div>
+            <button mat-raised-button color="primary" type="submit"
+                [disabled]="!modifyStudentForm.valid">Modificar</button>
+        </form>
+
+    </div>
+</div>
