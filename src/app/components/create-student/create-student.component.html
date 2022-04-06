@@ -9,7 +9,7 @@
                     <input matInput type="text" id="name" formControlName="name" placeholder="Nombre">
                     <mat-error *ngIf="createStudentForm.get('name')?.errors?.['required']" selected>Nombre es
                         requerido</mat-error>
-                    <mat-error *ngIf="createStudentForm.get('name')?.errors?.['noWhitespaceValidator']" selected>Nombre
+                    <mat-error *ngIf="createStudentForm.get('name')?.errors?.['whitespace']" selected>Nombre
                         no puede ser vacio</mat-error>
                     <mat-error *ngIf="createStudentForm.get('name')?.errors?.['minlength']" selected>Nombre menor a 3
                         caracteres</mat-error>
@@ -27,7 +27,7 @@
                     <input matInput type="text" id="apellido" formControlName="lastName" placeholder="Apellido">
                     <mat-error *ngIf="createStudentForm.get('lastName')?.errors?.['required']" selected>Apellido es
                         requerido</mat-error>
-                    <mat-error *ngIf="createStudentForm.get('lastName')?.errors?.['noWhitespaceValidator']" selected>
+                    <mat-error *ngIf="createStudentForm.get('lastName')?.errors?.['whitespace']" selected>
                         Apellido
                         no puede ser vacio</mat-error>
                     <mat-error *ngIf="createStudentForm.get('lastName')?.errors?.['minlength']" selected>Apellido menor
@@ -50,7 +50,7 @@
                     <input matInput type="email" id="email" formControlName="email">
                     <mat-error *ngIf="createStudentForm.get('email')?.errors?.['required']" selected>Email es
                         requerido</mat-error>
-                    <mat-error *ngIf="createStudentForm.get('email')?.errors?.['noWhitespaceValidator']" selected>
+                    <mat-error *ngIf="createStudentForm.get('email')?.errors?.['whitespace']" selected>
                         Email
                         no puede ser vacio</mat-error>
                     <mat-error *ngIf="createStudentForm.get('email')?.errors?.['email']" selected>Email no es valido
@@ -65,9 +65,9 @@
 
                     <mat-error *ngIf="createStudentForm.get('id')?.errors?.['required']" selected>Documento es
                         requerido</mat-error>
-                    <mat-error *ngIf="createStudentForm.get('id')?.errors?.['noWhitespaceValidator']" selected>
+                    <mat-error *ngIf="createStudentForm.get('id')?.errors?.['whitespace']" selected>
                         Documento no puede ser vacio</mat-error>
-                    <mat-hint *ngIf="createStudentForm.get('id')?.errors?.['noDuplicateIdValidator']" selected>Ya
+                    <mat-hint *ngIf="createStudentForm.get('id')?.errors?.['duplicate']" selected>Ya
                         existe
                         un estudiante con ese ID</mat-hint>
                     <mat-error *ngIf="createStudentForm.get('id')?.errors?.['minlength']" selected>Documento es

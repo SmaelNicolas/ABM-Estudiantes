@@ -8,7 +8,7 @@
 
                 <mat-error *ngIf="deleteStudentForm.get('id')?.errors?.['required']" selected>Documento es
                     requerido</mat-error>
-                <mat-error *ngIf="deleteStudentForm.get('id')?.errors?.['noWhitespaceValidator']" selected>
+                <mat-error *ngIf="deleteStudentForm.get('id')?.errors?.['whitespace']" selected>
                     Documento no puede ser vacio</mat-error>
                 <mat-error *ngIf="deleteStudentForm.get('id')?.errors?.['minlength']" selected>Documento es
                     menor a 7 numeros</mat-error>
