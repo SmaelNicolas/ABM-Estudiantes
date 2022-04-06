@@ -67,9 +67,9 @@
                         requerido</mat-error>
                     <mat-error *ngIf="createStudentForm.get('id')?.errors?.['noWhitespaceValidator']" selected>
                         Documento no puede ser vacio</mat-error>
-                    <mat-error *ngIf="createStudentForm.get('id')?.errors?.['noDuplicateIdValidator']" selected>Ya
+                    <mat-hint *ngIf="createStudentForm.get('id')?.errors?.['noDuplicateIdValidator']" selected>Ya
                         existe
-                        un estudiante con ese ID</mat-error>
+                        un estudiante con ese ID</mat-hint>
                     <mat-error *ngIf="createStudentForm.get('id')?.errors?.['minlength']" selected>Documento es
                         menor a 7 numeros</mat-error>
                     <mat-error *ngIf="createStudentForm.get('id')?.errors?.['maxlength']" selected>Documento es
