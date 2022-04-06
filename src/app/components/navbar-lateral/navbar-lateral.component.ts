@@ -47,7 +47,6 @@ export class NavbarLateralComponent implements OnInit {
     this.showListStudentsChange.emit(false);
     this.showListCoursesChange.emit(false);
     this.showLoginChange.emit(false);
-    console.log('LLAMA');
   }
 
   showDeleteStudentHandler() {
@@ -57,7 +56,6 @@ export class NavbarLateralComponent implements OnInit {
     this.showListStudentsChange.emit(false);
     this.showListCoursesChange.emit(false);
     this.showLoginChange.emit(false);
-    console.log('LLAMA');
   }
   showModifyStudentHandler() {
     this.showCreateStudentChange.emit(false);
@@ -66,7 +64,6 @@ export class NavbarLateralComponent implements OnInit {
     this.showListStudentsChange.emit(false);
     this.showListCoursesChange.emit(false);
     this.showLoginChange.emit(false);
-    console.log('LLAMA');
   }
   showListStudentsHandler() {
     this.showCreateStudentChange.emit(false);
@@ -75,7 +72,6 @@ export class NavbarLateralComponent implements OnInit {
     this.showListStudentsChange.emit(true);
     this.showListCoursesChange.emit(false);
     this.showLoginChange.emit(false);
-    console.log('LLAMA');
   }
   showListCoursesHandler() {
     this.showCreateStudentChange.emit(false);
