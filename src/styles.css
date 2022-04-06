@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+root {
+  --toolbarSize: 64px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  width: calc(100vw - (100vw - 100%));
+  /* min-height: calc(100vh- (100vh - 100%)); */
+}
+
+.mat-form-field {
+  width: 350px !important;
+}
+
+.mat-form-field-hint-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
