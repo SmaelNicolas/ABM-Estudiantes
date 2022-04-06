@@ -1,0 +1,42 @@
+.listStudentsContainer {
+  width: 100%;
+  min-height: 90%;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+table {
+  width: 90%;
+}
+
+.courseDisplay {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 20px;
+}
+.courseName {
+  width: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 10px;
+}
+.courseNameDisplay {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: max-content;
+  gap: 5px;
+}
+
+.courseNameLogo {
+  width: 20px;
+  height: 100%;
+  background-color: black;
+  padding: 2px;
+  border-radius: 50%;
+}
