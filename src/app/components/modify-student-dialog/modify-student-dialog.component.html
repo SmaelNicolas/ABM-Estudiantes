@@ -1,8 +1,10 @@
-<!-- <h1 mat-dialog-title>Modificaciones realizada correctamente</h1>
+<h1 mat-dialog-title>Modificaciones realizada correctamente</h1>
 <div mat-dialog-content>Estudiante {{data.lastName | uppercase }} {{data.name | uppercase}} </div>
 <div mat-dialog-content>Email: {{data.email}} </div>
 <div mat-dialog-content>DNI: {{ data.id }} </div>
-<div mat-dialog-content>ALTA en {{data.course }}</div>
+<div mat-dialog-content>Inscripto en
+    <span mat-dialog-content *ngFor="let course of data.course">{{course | uppercase }}</span>
+</div>
 <div mat-dialog-actions>
     <button mat-button mat-dialog-close>Cerrar</button>
-</div> -->
+</div>

@@ -5,9 +5,12 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+
 import { Courses } from 'src/app/class/courses';
 import { DataPeople } from 'src/app/class/data';
 import { Student } from 'src/app/class/student';
+import { ModifyStudentDialogComponent } from '../modify-student-dialog/modify-student-dialog.component';
 
 @Component({
   selector: 'app-modify-student',
@@ -25,7 +28,8 @@ export class ModifyStudentComponent implements OnInit {
   constructor(
     public studentCheckForm: FormBuilder,
     public studentModifyForm: FormBuilder,
-    public newCoursesModifyForm: FormBuilder
+    public newCoursesModifyForm: FormBuilder,
+    public dialog: MatDialog
   ) {
     this.checkStudentForm = this.studentCheckForm.group({
       id: new FormControl('', [
@@ -69,6 +73,18 @@ export class ModifyStudentComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  openDialog(s: Student) {
+    this.dialog.open(ModifyStudentDialogComponent, {
+      data: {
+        name: s.name,
+        lastName: s.lastName,
+        email: s.email,
+        id: s.id,
+        course: s.courses,
+      },
+    });
+  }
+
   createNewFormcourses(student: Student): void {
     this.newFormCourses = this.newCoursesModifyForm.group({
       angular: this.isInscribedInCourse('angular', student),
@@ -78,6 +94,7 @@ export class ModifyStudentComponent implements OnInit {
       python: this.isInscribedInCourse('python', student),
     });
   }
+
   isInscribedInCourse(course: string, student: Student): boolean {
     return student.courses.includes(course);
   }
@@ -117,6 +134,7 @@ export class ModifyStudentComponent implements OnInit {
     if (student !== undefined) {
       this.createStudentFromModifyForm(student);
       DataPeople.replaceStudent(student);
+      this.openDialog(student);
       this.checkStudentForm.reset();
       this.modify = false;
     } else {
