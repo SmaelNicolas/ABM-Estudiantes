@@ -90,6 +90,10 @@ export class DataPeople {
   public static getCoursesList(): Courses[] {
     return this.coursesList;
   }
+  public static getCoursesListAvailable(): Courses[] {
+    return this.coursesList.filter((course) => course.isAvailable);
+  }
+
   public static addCourse(course: Courses) {
     this.coursesList.push(course);
   }
