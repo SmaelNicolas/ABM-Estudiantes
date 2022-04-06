@@ -25,7 +25,7 @@ export class DeleteStudentComponent implements OnInit {
       id: new FormControl('', [
         Validators.required,
         this.noWhitespaceValidator,
-        Validators.minLength(3),
+        Validators.minLength(7),
         Validators.maxLength(15),
         Validators.pattern('[0-9]*'),
       ]),
@@ -61,7 +61,7 @@ export class DeleteStudentComponent implements OnInit {
       this.validStudent = false;
       setTimeout(() => {
         this.validStudent = true;
-      }, 2000);
+      }, 3000);
     }
   }
 }
