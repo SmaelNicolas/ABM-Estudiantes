@@ -3,16 +3,7 @@ import { Admin } from './admin';
 import { Courses } from './courses';
 
 export class DataPeople {
-  public static studentList: Student[] = [
-    {
-      id: 123456789,
-      name: 'Juan',
-      lastName: 'Perez',
-      email: 'juanpe@example.com',
-      password: '12345',
-      courses: ['angular'],
-    },
-  ];
+  public static studentList: Student[] = [];
   public static adminList: Admin[] = [];
   public static coursesList: Courses[] = [
     {
@@ -63,10 +54,15 @@ export class DataPeople {
   public static deleteStudent(id: number) {
     this.studentList = this.studentList.filter((student) => student.id !== id);
   }
-  public static getStudent(id: number): Student | undefined {
-    return this.studentList.find((student) => student.id === id);
+  public static getStudent(id: number): Student {
+    return this.studentList.find((student) => student.id === id)!;
   }
-  public static modifyStudent(student: Student) {
+  public static alreadyStudent(id: number): boolean {
+    return this.studentList.find((student) => student.id === id)!
+      ? true
+      : false;
+  }
+  public static replaceStudent(student: Student) {
     const index = this.studentList.findIndex((s) => s.id === student.id);
     this.studentList[index] = student;
   }
