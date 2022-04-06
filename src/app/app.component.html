@@ -4,7 +4,9 @@
 
     <app-toolbar></app-toolbar>
 
-    <app-navbar-lateral></app-navbar-lateral>
+    <app-navbar-lateral [(showCreateStudent)]="showCreateStudent" [(showDeleteStudent)]="showDeleteStudent"
+        [(showModifyStudent)]="showModifyStudent" [(showListStudents)]="showListStudents"
+        [(showListCourses)]="showListCourses" [(showLogin)]="showLogin"></app-navbar-lateral>
     <app-create-student *ngIf="showCreateStudent">
 
         <app-login *ngIf="showLogin"></app-login>

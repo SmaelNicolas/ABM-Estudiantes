@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Student } from 'src/app/class/student';
 import { DataPeople } from 'src/app/class/data';
+import { Courses } from 'src/app/class/courses';
 
 @Component({
   selector: 'app-create-student',
@@ -15,7 +16,7 @@ import { DataPeople } from 'src/app/class/data';
 })
 export class CreateStudentComponent implements OnInit {
   createStudentForm!: FormGroup;
-  coursesList: string[] = ['Angular', 'Javascript', 'ReactJs'];
+  coursesList: Courses[] = DataPeople.getCoursesListAvailable();
 
   constructor(public studentAddForm: FormBuilder) {
     this.createStudentForm = this.studentAddForm.group({
@@ -46,12 +47,7 @@ export class CreateStudentComponent implements OnInit {
         Validators.email,
         Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
       ]),
-      course: new FormControl('', [
-        Validators.required,
-        this.noWhitespaceValidator,
-        Validators.minLength(3),
-        Validators.maxLength(15),
-      ]),
+      course: new FormControl('', [Validators.required]),
     });
   }
 
@@ -71,7 +67,7 @@ export class CreateStudentComponent implements OnInit {
     let password: string =
       this.createStudentForm.get('lastName')!.value +
       this.createStudentForm.get('course')!.value;
-    let course: string = this.createStudentForm.get('course')!.value;
+    let course: string = this.createStudentForm.get('course')!.value.name;
     let studentToAdd: Student = new Student(
       id,
       name,

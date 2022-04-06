@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'ProyectoFinal';
 
   showCreateStudent: boolean = false;
@@ -17,53 +17,12 @@ export class AppComponent {
 
   constructor() {}
 
-  showCreateStudentHandler() {
-    this.showCreateStudent = true;
-    this.showDeleteStudent = false;
-    this.showModifyStudent = false;
-    this.showListStudents = false;
-    this.showListCourses = false;
-    this.showLogin = false;
-    console.log('LLAMA');
-  }
-  showDeleteStudentHandler() {
-    this.showCreateStudent = false;
-    this.showDeleteStudent = true;
-    this.showModifyStudent = false;
-    this.showListStudents = false;
-    this.showListCourses = false;
-    this.showLogin = false;
-  }
-  showModifyStudentHandler() {
-    this.showCreateStudent = false;
-    this.showDeleteStudent = false;
-    this.showModifyStudent = true;
-    this.showListStudents = false;
-    this.showListCourses = false;
-    this.showLogin = false;
-  }
-  showListStudentsHandler() {
-    this.showCreateStudent = false;
-    this.showDeleteStudent = false;
-    this.showModifyStudent = false;
-    this.showListStudents = true;
-    this.showListCourses = false;
-    this.showLogin = false;
-  }
-  showListCoursesHandler() {
-    this.showCreateStudent = false;
-    this.showDeleteStudent = false;
-    this.showModifyStudent = false;
-    this.showListStudents = false;
-    this.showListCourses = true;
-    this.showLogin = false;
-  }
-  showLoginHandler() {
+  ngOnInit() {
     this.showCreateStudent = false;
     this.showDeleteStudent = false;
     this.showModifyStudent = false;
     this.showListStudents = false;
     this.showListCourses = false;
-    this.showLogin = true;
+    this.showLogin = false;
   }
 }
