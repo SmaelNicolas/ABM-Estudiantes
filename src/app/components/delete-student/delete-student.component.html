@@ -1,26 +1,27 @@
 <div class="deleteStudentContainer">
-    <h1>Baja de Estudiantes</h1>
+    <h1 appTitleFontSize>Baja de Estudiantes</h1>
     <form [formGroup]="deleteStudentForm" class="deleteStudentForm" (ngSubmit)="deleteStudent()">
         <div>
             <mat-form-field appearance="fill">
                 <mat-label for="id">Documento</mat-label>
                 <input matInput type="text" id="id" formControlName="id">
 
-                <mat-hint *ngIf="deleteStudentForm.get('id')?.errors?.['required']" selected>Documento es
-                    requerido</mat-hint>
-                <mat-hint *ngIf="deleteStudentForm.get('id')?.errors?.['noWhitespaceValidator']" selected>
-                    Documento es
-                    Invalido</mat-hint>
-                <mat-hint *ngIf="deleteStudentForm.get('id')?.errors?.['maxlength']" selected>Documento es
-                    Invalido</mat-hint>
-                <mat-hint *ngIf="deleteStudentForm.get('id')?.errors?.['pattern']" selected>Documento es
-                    Invalido</mat-hint>
-                <mat-hint *ngIf="!validStudent">No existe estudiante con ese ID</mat-hint>
+                <mat-error *ngIf="deleteStudentForm.get('id')?.errors?.['required']" selected>Documento es
+                    requerido</mat-error>
+                <mat-error *ngIf="deleteStudentForm.get('id')?.errors?.['noWhitespaceValidator']" selected>
+                    Documento no puede ser vacio</mat-error>
+                <mat-error *ngIf="deleteStudentForm.get('id')?.errors?.['minlength']" selected>Documento es
+                    menor a 7 numeros</mat-error>
+                <mat-error *ngIf="deleteStudentForm.get('id')?.errors?.['maxlength']" selected>Documento es
+                    mayor a 15 numeros</mat-error>
+                <mat-error *ngIf="deleteStudentForm.get('id')?.errors?.['pattern']" selected>Documento debe ser solo
+                    numeros</mat-error>
+                <mat-error *ngIf="!validStudent">No existe estudiante con ese ID</mat-error>
 
             </mat-form-field>
         </div>
         <button mat-raised-button color="primary" type="submit" (click)="deleteStudent()"
-            [disabled]="deleteStudentForm.valid">DAR DE BAJA</button>
+            [disabled]="!deleteStudentForm.valid">DAR DE BAJA</button>
     </form>
 
 </div>

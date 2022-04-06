@@ -12,36 +12,39 @@
                 <div class="inputContainer">
                     <label for="email">Email</label>
                     <input type="text" class="form-control" id="email" formControlName="email">
-                    <mat-chip *ngIf="loginForm.get('email')?.errors?.['required']" color="warn" selected>Email is
+                    <mat-error *ngIf="loginForm.get('email')?.errors?.['required']" color="warn" selected>Email is
                         required
-                    </mat-chip>
-                    <mat-chip *ngIf="loginForm.get('email')?.errors?.['email']" color="warn" selected>Email is invalid
-                    </mat-chip>
-                    <mat-chip *ngIf="loginForm.get('email')?.errors?.['pattern']" color="warn" selected>Email is invalid
-                    </mat-chip>
-                    <mat-chip *ngIf="loginForm.get('email')?.errors?.['whitespace']" color="warn" selected>Email is
+                    </mat-error>
+                    <mat-error *ngIf="loginForm.get('email')?.errors?.['email']" color="warn" selected>Email is invalid
+                    </mat-error>
+                    <mat-error *ngIf="loginForm.get('email')?.errors?.['pattern']" color="warn" selected>Email is
                         invalid
-                    </mat-chip>
+                    </mat-error>
+                    <mat-error *ngIf="loginForm.get('email')?.errors?.['whitespace']" color="warn" selected>Email is
+                        invalid
+                    </mat-error>
                 </div>
 
                 <div class="inputContainer">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" formControlName="password">
-                    <mat-chip *ngIf="loginForm.get('password')?.errors?.['required']" color="warn" selected>Password is
+                    <mat-error *ngIf="loginForm.get('password')?.errors?.['required']" color="warn" selected>Password is
                         required
-                    </mat-chip>
-                    <mat-chip *ngIf="loginForm.get('password')?.errors?.['minlength']" color="warn" selected>Password is
+                    </mat-error>
+                    <mat-error *ngIf="loginForm.get('password')?.errors?.['minlength']" color="warn" selected>Password
+                        is
                         is
                         too short
-                    </mat-chip>
-                    <mat-chip *ngIf="loginForm.get('password')?.errors?.['maxlength']" color="warn" selected>Password is
+                    </mat-error>
+                    <mat-error *ngIf="loginForm.get('password')?.errors?.['maxlength']" color="warn" selected>Password
+                        is
                         too
                         long
-                    </mat-chip>
-                    <mat-chip *ngIf="loginForm.get('password')?.errors?.['whitespace']" color="warn" selected>Password
+                    </mat-error>
+                    <mat-error *ngIf="loginForm.get('password')?.errors?.['whitespace']" color="warn" selected>Password
                         is
                         invalid
-                    </mat-chip>
+                    </mat-error>
                 </div>
             </mat-card-content>
 

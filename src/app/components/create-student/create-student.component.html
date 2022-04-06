@@ -1,22 +1,23 @@
 <div class="createStudentContainer">
     <div class="createStudentForm">
-        <h1>Alta de Estudiantes</h1>
+        <h1 appTitleFontSize>Alta de Estudiantes</h1>
         <form [formGroup]="createStudentForm" (ngSubmit)="saveStudent()">
 
             <div>
                 <mat-form-field appearance="fill">
                     <mat-label for="name">Nombre</mat-label>
                     <input matInput type="text" id="name" formControlName="name" placeholder="Nombre">
-                    <mat-hint *ngIf="createStudentForm.get('name')?.errors?.['required']" selected>Nombre es
-                        requerido</mat-hint>
-                    <mat-hint *ngIf="createStudentForm.get('name')?.errors?.['noWhitespaceValidator']" selected>Nombre
-                        no puede ser vacio</mat-hint>
-                    <mat-hint *ngIf="createStudentForm.get('name')?.errors?.['minlength']" selected>Nombre menor a 3
-                        caracteres</mat-hint>
-                    <mat-hint *ngIf="createStudentForm.get('name')?.errors?.['maxlength']" selected>Nombre mayor a 15
-                        caracteres</mat-hint>
-                    <mat-hint *ngIf="createStudentForm.get('name')?.errors?.['pattern']" selected>Nombre debe ser solo
-                        letras</mat-hint>
+                    <mat-error *ngIf="createStudentForm.get('name')?.errors?.['required']" selected>Nombre es
+                        requerido</mat-error>
+                    <mat-error *ngIf="createStudentForm.get('name')?.errors?.['noWhitespaceValidator']" selected>Nombre
+                        no puede ser vacio</mat-error>
+                    <mat-error *ngIf="createStudentForm.get('name')?.errors?.['minlength']" selected>Nombre menor a 3
+                        caracteres</mat-error>
+                    <mat-error *ngIf="createStudentForm.get('name')?.errors?.['maxlength']" selected>Nombre mayor a 15
+                        caracteres</mat-error>
+                    <mat-error *ngIf="createStudentForm.get('name')?.errors?.['pattern']" selected>Nombre debe ser solo
+                        letras</mat-error>
+
                 </mat-form-field>
             </div>
 
@@ -24,20 +25,22 @@
                 <mat-form-field appearance="fill">
                     <mat-label for="apellido">Apellido</mat-label>
                     <input matInput type="text" id="apellido" formControlName="lastName" placeholder="Apellido">
-                    <mat-hint *ngIf="createStudentForm.get('lastName')?.errors?.['required']" selected>Apellido es
-                        requerido</mat-hint>
-                    <mat-hint *ngIf="createStudentForm.get('lastName')?.errors?.['noWhitespaceValidator']" selected>
+                    <mat-error *ngIf="createStudentForm.get('lastName')?.errors?.['required']" selected>Apellido es
+                        requerido</mat-error>
+                    <mat-error *ngIf="createStudentForm.get('lastName')?.errors?.['noWhitespaceValidator']" selected>
                         Apellido
-                        no puede ser vacio</mat-hint>
-                    <mat-hint *ngIf="createStudentForm.get('lastName')?.errors?.['minlength']" selected>Apellido menor a
+                        no puede ser vacio</mat-error>
+                    <mat-error *ngIf="createStudentForm.get('lastName')?.errors?.['minlength']" selected>Apellido menor
+                        a
                         3
-                        caracteres</mat-hint>
-                    <mat-hint *ngIf="createStudentForm.get('lastName')?.errors?.['maxlength']" selected>Apellido mayor a
+                        caracteres</mat-error>
+                    <mat-error *ngIf="createStudentForm.get('lastName')?.errors?.['maxlength']" selected>Apellido mayor
+                        a
                         15
-                        caracteres</mat-hint>
-                    <mat-hint *ngIf="createStudentForm.get('lastName')?.errors?.['pattern']" selected>Apellido debe ser
+                        caracteres</mat-error>
+                    <mat-error *ngIf="createStudentForm.get('lastName')?.errors?.['pattern']" selected>Apellido debe ser
                         solo
-                        letras</mat-hint>
+                        letras</mat-error>
                 </mat-form-field>
             </div>
 
@@ -45,13 +48,13 @@
                 <mat-form-field appearance="fill">
                     <mat-label for="email">Email</mat-label>
                     <input matInput type="email" id="email" formControlName="email">
-                    <mat-hint *ngIf="createStudentForm.get('email')?.errors?.['required']" selected>Email es
-                        requerido</mat-hint>
-                    <mat-hint *ngIf="createStudentForm.get('email')?.errors?.['noWhitespaceValidator']" selected>
+                    <mat-error *ngIf="createStudentForm.get('email')?.errors?.['required']" selected>Email es
+                        requerido</mat-error>
+                    <mat-error *ngIf="createStudentForm.get('email')?.errors?.['noWhitespaceValidator']" selected>
                         Email
-                        no puede ser vacio</mat-hint>
-                    <mat-hint *ngIf="createStudentForm.get('email')?.errors?.['email']" selected>Email no es valido
-                    </mat-hint>
+                        no puede ser vacio</mat-error>
+                    <mat-error *ngIf="createStudentForm.get('email')?.errors?.['email']" selected>Email no es valido
+                    </mat-error>
                 </mat-form-field>
             </div>
 
@@ -60,15 +63,21 @@
                     <mat-label for="id">Documento</mat-label>
                     <input matInput type="email" id="id" formControlName="id">
 
-                    <mat-hint *ngIf="createStudentForm.get('id')?.errors?.['required']" selected>Documento es
-                        requerido</mat-hint>
-                    <mat-hint *ngIf="createStudentForm.get('id')?.errors?.['noWhitespaceValidator']" selected>
-                        Documento es
-                        Invalido</mat-hint>
-                    <mat-hint *ngIf="createStudentForm.get('id')?.errors?.['maxlength']" selected>Documento es
-                        Invalido</mat-hint>
-                    <mat-hint *ngIf="createStudentForm.get('id')?.errors?.['pattern']" selected>Documento es
-                        Invalido</mat-hint>
+                    <mat-error *ngIf="createStudentForm.get('id')?.errors?.['required']" selected>Documento es
+                        requerido</mat-error>
+                    <mat-error *ngIf="createStudentForm.get('id')?.errors?.['noWhitespaceValidator']" selected>
+                        Documento no puede ser vacio</mat-error>
+                    <mat-error *ngIf="createStudentForm.get('id')?.errors?.['noDuplicateIdValidator']" selected>Ya
+                        existe
+                        un estudiante con ese ID</mat-error>
+                    <mat-error *ngIf="createStudentForm.get('id')?.errors?.['minlength']" selected>Documento es
+                        menor a 7 numeros</mat-error>
+                    <mat-error *ngIf="createStudentForm.get('id')?.errors?.['maxlength']" selected>Documento es
+                        mayor a 15 numeros</mat-error>
+                    <mat-error *ngIf="createStudentForm.get('id')?.errors?.['pattern']" selected>Documento es
+                        Invalido</mat-error>
+
+
 
 
                 </mat-form-field>
@@ -82,8 +91,8 @@
                             {{course.name | uppercase}}</mat-option>
                     </mat-select>
 
-                    <mat-hint *ngIf="createStudentForm.get('course')?.errors?.['required']" selected>Curso es
-                        requerido</mat-hint>
+                    <mat-error *ngIf="createStudentForm.get('course')?.errors?.['required']" selected>Curso es
+                        requerido</mat-error>
 
 
                 </mat-form-field>
