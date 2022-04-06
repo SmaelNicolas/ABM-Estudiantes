@@ -15,6 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteStudentDialogComponent } from './components/delete-student-dialog/delete-student-dialog.component';
 import { ModifyStudentComponent } from './components/modify-student/modify-student.component';
 import { ModifyStudentDialogComponent } from './components/modify-student-dialog/modify-student-dialog.component';
+import { CreateStudentDialogComponent } from './components/create-student-dialog/create-student-dialog.component';
+import { TitleFontSizeDirective } from './directives/title-font-size.directive';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { ModifyStudentDialogComponent } from './components/modify-student-dialog
     DeleteStudentDialogComponent,
     ModifyStudentComponent,
     ModifyStudentDialogComponent,
+    CreateStudentDialogComponent,
+    TitleFontSizeDirective,
   ],
   imports: [
     BrowserModule,
