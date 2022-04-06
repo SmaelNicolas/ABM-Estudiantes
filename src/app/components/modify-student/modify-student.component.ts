@@ -36,6 +36,7 @@ export class ModifyStudentComponent implements OnInit {
         Validators.pattern('[0-9]*'),
       ]),
     });
+
     this.modifyStudentForm = this.studentModifyForm.group({
       name: new FormControl('', [
         Validators.required,
@@ -60,42 +61,38 @@ export class ModifyStudentComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
-
   public noWhitespaceValidator(control: FormControl) {
     const isWhitespace = (control.value || '').trim().length === 0;
     const isValid = !isWhitespace;
     return isValid ? null : { whitespace: true };
   }
 
-  isInscribedInCourse(course: string, student: Student) {
+  ngOnInit(): void {}
+
+  createNewFormcourses(student: Student): void {
+    this.newFormCourses = this.newCoursesModifyForm.group({
+      angular: this.isInscribedInCourse('angular', student),
+      javascript: this.isInscribedInCourse('javascript', student),
+      react: this.isInscribedInCourse('react', student),
+      node: this.isInscribedInCourse('node', student),
+      python: this.isInscribedInCourse('python', student),
+    });
+  }
+  isInscribedInCourse(course: string, student: Student): boolean {
     return student.courses.includes(course);
   }
 
-  modifyStudent() {
-    let id: number = parseInt(this.checkStudentForm.get('id')!.value);
-    let student: Student | undefined = DataPeople.getStudent(id);
-    // let newStudent: Student = new Student(
-    if (student !== undefined) {
-      DataPeople.modifyStudent(student);
-      this.checkStudentForm.reset();
-    } else {
-      this.validStudent = false;
-    }
+  getIdFromForm(): number {
+    return parseInt(this.checkStudentForm.get('id')!.value);
   }
 
-  canModify() {
-    let id: number = parseInt(this.checkStudentForm.get('id')!.value);
-    let student: Student | undefined = DataPeople.getStudent(id);
+  canModify(): void {
+    let id: number = this.getIdFromForm();
+    let student: Student = DataPeople.getStudent(id);
+
     if (student !== undefined) {
       this.modify = true;
-      this.newFormCourses = this.newCoursesModifyForm.group({
-        angular: this.isInscribedInCourse('angular', student),
-        javascript: this.isInscribedInCourse('javascript', student),
-        react: this.isInscribedInCourse('react', student),
-        node: this.isInscribedInCourse('node', student),
-        python: this.isInscribedInCourse('python', student),
-      });
+      this.createNewFormcourses(student);
     } else {
       this.validStudent = false;
       setTimeout(() => {
@@ -104,7 +101,7 @@ export class ModifyStudentComponent implements OnInit {
     }
   }
 
-  createNewArrayCourses() {
+  createNewArrayCourses(): string[] {
     let newArrayCourses: string[] = [];
     for (let course in this.newFormCourses.value) {
       if (this.newFormCourses.value[course]) {
@@ -114,15 +111,12 @@ export class ModifyStudentComponent implements OnInit {
     return newArrayCourses;
   }
 
-  updateStudent() {
-    let id: number = parseInt(this.checkStudentForm.get('id')!.value);
-    let student: Student | undefined = DataPeople.getStudent(id);
+  updateStudent(): void {
+    let id: number = this.getIdFromForm();
+    let student: Student = DataPeople.getStudent(id);
     if (student !== undefined) {
-      student.name = this.modifyStudentForm.get('name')!.value;
-      student.lastName = this.modifyStudentForm.get('lastName')!.value;
-      student.email = this.modifyStudentForm.get('email')!.value;
-      student.courses = this.createNewArrayCourses();
-      DataPeople.modifyStudent(student);
+      this.createStudentFromModifyForm(student);
+      DataPeople.replaceStudent(student);
       this.checkStudentForm.reset();
       this.modify = false;
     } else {
@@ -131,5 +125,12 @@ export class ModifyStudentComponent implements OnInit {
         this.validStudent = true;
       }, 2000);
     }
+  }
+
+  createStudentFromModifyForm(student: Student): void {
+    student.name = this.modifyStudentForm.get('name')!.value;
+    student.lastName = this.modifyStudentForm.get('lastName')!.value;
+    student.email = this.modifyStudentForm.get('email')!.value;
+    student.courses = this.createNewArrayCourses();
   }
 }
