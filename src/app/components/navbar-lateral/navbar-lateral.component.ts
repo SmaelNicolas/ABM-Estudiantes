@@ -18,6 +18,8 @@ export class NavbarLateralComponent implements OnInit {
   @Input() showListCourses: any;
   @Input() showLogin: any;
   @Input() showLoading: any;
+  @Input() logInStudent: any;
+  @Input() showNavbar: any;
 
   @Output()
   showCreateStudentChange = new EventEmitter<any>();
@@ -35,6 +37,10 @@ export class NavbarLateralComponent implements OnInit {
   showLoginChange = new EventEmitter<any>();
   @Output()
   showLoadingChange = new EventEmitter<any>();
+  @Output()
+  logInStudentChange = new EventEmitter<any>();
+  @Output()
+  showNavbarChange = new EventEmitter<any>();
 
   constructor() {}
 
@@ -47,6 +53,10 @@ export class NavbarLateralComponent implements OnInit {
     this.opened = false;
   }
 
+  firstRender() {
+    this.start = false;
+  }
+
   showCreateStudentHandler() {
     this.showLoadingChange.emit(true);
     setTimeout(() => {
@@ -55,6 +65,7 @@ export class NavbarLateralComponent implements OnInit {
     this.showCreateStudentChange.emit(true);
     this.showDeleteStudentChange.emit(false);
     this.showModifyStudentChange.emit(false);
+    this.showModifyCoursesChange.emit(false);
     this.showListStudentsChange.emit(false);
     this.showListCoursesChange.emit(false);
     this.showLoginChange.emit(false);
@@ -137,6 +148,21 @@ export class NavbarLateralComponent implements OnInit {
     this.showListStudentsChange.emit(false);
     this.showListCoursesChange.emit(false);
     this.showLoginChange.emit(true);
-    this.start = false;
+  }
+
+  logOut() {
+    this.showLoadingChange.emit(true);
+    setTimeout(() => {
+      this.showLoadingChange.emit(false);
+    }, 1500);
+    this.showCreateStudentChange.emit(false);
+    this.showDeleteStudentChange.emit(false);
+    this.showModifyStudentChange.emit(false);
+    this.showModifyCoursesChange.emit(false);
+    this.showListStudentsChange.emit(false);
+    this.showListCoursesChange.emit(false);
+    this.showLoginChange.emit(true);
+    this.logInStudentChange.emit(false);
+    this.showNavbarChange.emit(false);
   }
 }
