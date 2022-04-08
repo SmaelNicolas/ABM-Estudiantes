@@ -82,13 +82,17 @@ export class ModifyCourseComponent implements OnInit {
   }
 
   addNewCourse() {
-    let newCourse: Courses = new Courses(
+    let newCourse: Courses = this.createNewCourse();
+    DataCourses.addCourse(newCourse);
+    this.courseList = DataCourses.getCoursesList();
+  }
+
+  createNewCourse(): Courses {
+    return new Courses(
       this.createNewCourseForm.get('name')!.value,
       this.createNewCourseForm.get('description')!.value,
       this.createNewCourseForm.get('imageUrl')!.value,
       this.createNewCourseForm.get('isAvailable')!.value
     );
-    DataCourses.addCourse(newCourse);
-    this.courseList = DataCourses.getCoursesList();
   }
 }

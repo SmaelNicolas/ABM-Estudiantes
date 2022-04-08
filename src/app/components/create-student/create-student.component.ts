@@ -82,25 +82,25 @@ export class CreateStudentComponent implements OnInit {
     });
   }
 
-  saveStudent() {
-    let id: number = parseInt(this.createStudentForm.get('id')!.value);
-    let name: string = this.createStudentForm.get('name')!.value;
-    let lastName: string = this.createStudentForm.get('lastName')!.value;
-    let email: string = this.createStudentForm.get('email')!.value;
-    let password: string =
-      this.createStudentForm.get('lastName')!.value +
-      this.createStudentForm.get('course')!.value;
-    let course: string = this.createStudentForm.get('course')!.value.name;
-    let studentToAdd: Student = new Student(
-      id,
-      name,
-      lastName,
-      email,
-      password,
-      course
-    );
+  saveStudent(): void {
+    let studentToAdd = this.createStudent();
     DataStudent.addStudent(studentToAdd);
     this.openDialog(studentToAdd);
     this.createStudentForm.reset();
+  }
+
+  createStudent(): Student {
+    let id: number = parseInt(this.getValueFromForm('id'));
+    let name: string = this.getValueFromForm('name');
+    let lastName: string = this.getValueFromForm('lastName');
+    let email: string = this.getValueFromForm('email');
+    let password: string =
+      this.getValueFromForm('lastName') + this.getValueFromForm('id');
+    let course: string = this.getValueFromForm('course').name;
+    return new Student(id, name, lastName, email, password, course);
+  }
+
+  getValueFromForm(value: string) {
+    return this.createStudentForm.get(value)!.value;
   }
 }

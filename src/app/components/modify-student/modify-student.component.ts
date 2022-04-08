@@ -80,7 +80,7 @@ export class ModifyStudentComponent implements OnInit {
     });
   }
 
-  createNewFormcourses(student: Student): void {
+  createNewFormCourses(student: Student): void {
     this.newFormCourses = this.newCoursesModifyForm.group({
       angular: this.isInscribedInCourse('angular', student),
       javascript: this.isInscribedInCourse('javascript', student),
@@ -99,18 +99,15 @@ export class ModifyStudentComponent implements OnInit {
   }
 
   getStudentFromForm(): Student {
-    return DataStudent.getStudent(
-      parseInt(this.checkStudentForm.get('id')!.value)
-    );
+    return DataStudent.getStudent(this.getIdFromForm());
   }
 
   canModify(): void {
-    let id: number = this.getIdFromForm();
-    let student: Student = DataStudent.getStudent(id);
+    let student: Student = this.getStudentFromForm();
 
     if (student !== undefined) {
       this.modify = true;
-      this.createNewFormcourses(student);
+      this.createNewFormCourses(student);
     } else {
       this.validStudent = false;
       setTimeout(() => {
