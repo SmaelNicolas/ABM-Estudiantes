@@ -8,9 +8,10 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 
 import { Student } from 'src/app/class/student';
-import { DataPeople } from 'src/app/class/data';
+import { DataStudent } from 'src/app/class/dataStudents';
 import { Courses } from 'src/app/class/courses';
 import { CreateStudentDialogComponent } from '../create-student-dialog/create-student-dialog.component';
+import { DataCourses } from 'src/app/class/dataCourses';
 
 @Component({
   selector: 'app-create-student',
@@ -19,7 +20,7 @@ import { CreateStudentDialogComponent } from '../create-student-dialog/create-st
 })
 export class CreateStudentComponent implements OnInit {
   createStudentForm!: FormGroup;
-  coursesList: Courses[] = DataPeople.getCoursesListAvailable();
+  coursesList: Courses[] = DataCourses.getCoursesListAvailable();
 
   constructor(public studentAddForm: FormBuilder, public dialog: MatDialog) {
     this.createStudentForm = this.studentAddForm.group({
@@ -64,7 +65,7 @@ export class CreateStudentComponent implements OnInit {
   }
 
   public noDuplicateIdValidator(control: FormControl) {
-    let isDuplicate = DataPeople.alreadyStudent(parseInt(control.value));
+    let isDuplicate = DataStudent.alreadyStudent(parseInt(control.value));
     let isValid = !isDuplicate;
     return isValid ? null : { duplicate: true };
   }
@@ -76,7 +77,7 @@ export class CreateStudentComponent implements OnInit {
         lastName: s.lastName,
         email: s.email,
         id: s.id,
-        course: s.courses,
+        course: s.courses[0],
       },
     });
   }
@@ -98,7 +99,7 @@ export class CreateStudentComponent implements OnInit {
       password,
       course
     );
-    DataPeople.addStudent(studentToAdd);
+    DataStudent.addStudent(studentToAdd);
     this.openDialog(studentToAdd);
     this.createStudentForm.reset();
   }
