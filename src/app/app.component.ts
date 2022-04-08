@@ -8,14 +8,15 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'ProyectoFinal';
 
-  showCreateStudent: boolean = true;
+  showCreateStudent: boolean = false;
   showDeleteStudent: boolean = false;
   showModifyStudent: boolean = false;
+  showModifyCourses: boolean = false;
   showListStudents: boolean = false;
   showListCourses: boolean = false;
   showLogin: boolean = false;
+  showLoading: boolean = true;
 
   constructor() {}
-
   ngOnInit() {}
 }
