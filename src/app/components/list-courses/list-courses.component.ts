@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Courses } from 'src/app/class/courses';
-import { DataPeople } from 'src/app/class/data';
+import { DataCourses } from 'src/app/class/dataCourses';
 
 @Component({
   selector: 'app-list-courses',
@@ -8,7 +8,7 @@ import { DataPeople } from 'src/app/class/data';
   styleUrls: ['./list-courses.component.css'],
 })
 export class ListCoursesComponent implements OnInit {
-  courses: Courses[] = DataPeople.getCoursesList();
+  courses: Courses[] = DataCourses.getCoursesList();
 
   constructor() {}
 
