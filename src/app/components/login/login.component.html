@@ -1,59 +1,57 @@
-<div class="loginContainer">
+<div class="sectionContainer ">
+    <div *ngIf="start">{{showLoadingHandler()}}</div>
+
+    <h2 appTitleFontSize>Iniciar Sesion</h2>
 
     <form (ngSubmit)="logUser()" [formGroup]="loginForm" class="formContainer">
 
-        <mat-card class="example-card cardContainer">
 
-            <mat-card-header>
-                <mat-card-title>Log in ... </mat-card-title>
-            </mat-card-header>
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label for="email">Email</mat-label>
+                <input matInput type="email" id="email" formControlName="email">
+                <mat-error *ngIf="loginForm.get('email')?.errors?.['required']" selected>Email es
+                    requerido</mat-error>
+                <mat-hint>Momentaneamente no se requiere email para iniciar sesion</mat-hint>
+                <mat-error *ngIf="loginForm.get('email')?.errors?.['whitespace']" selected>
+                    Email
+                    no puede ser vacio</mat-error>
+                <mat-error *ngIf="loginForm.get('email')?.errors?.['email']" selected>Email no es valido
+                </mat-error>
+                <mat-error *ngIf="loginForm.get('email')?.errors?.['pattern']" selected>Email no es valido
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label for="password">Contraseña</mat-label>
+                <input matInput type="password" id="password" formControlName="password">
+                <mat-hint>Momentaneamente no se requiere constraseña para iniciar sesion</mat-hint>
+                <mat-error *ngIf="loginForm.get('password')?.errors?.['required']" selected>
+                    Contraseña es
+                    requerido</mat-error>
+                <mat-error *ngIf="loginForm.get('password')?.errors?.['whitespace']" selected>
+                    Contraseña
+                    no puede ser vacio</mat-error>
+                <mat-error *ngIf="loginForm.get('password')?.errors?.['minlength']" selected>
+                    Contraseña
+                    es menor a 8 caracteres</mat-error>
+                <mat-error *ngIf="loginForm.get('password')?.errors?.['maxlength']" selected>
+                    Contraseña
+                    es mayor a 20 caracteres</mat-error>
 
-            <mat-card-content>
-                <div class="inputContainer">
-                    <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email" formControlName="email">
-                    <mat-error *ngIf="loginForm.get('email')?.errors?.['required']" color="warn" selected>Email is
-                        required
-                    </mat-error>
-                    <mat-error *ngIf="loginForm.get('email')?.errors?.['email']" color="warn" selected>Email is invalid
-                    </mat-error>
-                    <mat-error *ngIf="loginForm.get('email')?.errors?.['pattern']" color="warn" selected>Email is
-                        invalid
-                    </mat-error>
-                    <mat-error *ngIf="loginForm.get('email')?.errors?.['whitespace']" color="warn" selected>Email is
-                        invalid
-                    </mat-error>
-                </div>
+            </mat-form-field>
+        </div>
 
-                <div class="inputContainer">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" formControlName="password">
-                    <mat-error *ngIf="loginForm.get('password')?.errors?.['required']" color="warn" selected>Password is
-                        required
-                    </mat-error>
-                    <mat-error *ngIf="loginForm.get('password')?.errors?.['minlength']" color="warn" selected>Password
-                        is
-                        is
-                        too short
-                    </mat-error>
-                    <mat-error *ngIf="loginForm.get('password')?.errors?.['maxlength']" color="warn" selected>Password
-                        is
-                        too
-                        long
-                    </mat-error>
-                    <mat-error *ngIf="loginForm.get('password')?.errors?.['whitespace']" color="warn" selected>Password
-                        is
-                        invalid
-                    </mat-error>
-                </div>
-            </mat-card-content>
+        <button class="buttonLogin" mat-raised-button color="primary" type="submit"
+            (click)="clickStudentHandler()">Ingresar como
+            ESTUDIANTE</button>
+        <button class="buttonLogin" mat-raised-button color="warn" type="submit"
+            (click)="clickAdminHandler() ; ">Ingrsar
+            como
+            ADMINISTRADOR</button>
 
-            <div class="buttonContainer">
-                <button mat-raised-button color="primary" type="submit">... as Student</button>
-                <button mat-raised-button color="primary" type="submit">... as Admin</button>
-            </div>
 
-        </mat-card>
     </form>
 
 </div>
