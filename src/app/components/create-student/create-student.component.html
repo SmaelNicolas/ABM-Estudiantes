@@ -1,104 +1,101 @@
-<div class="createStudentContainer">
-    <div class="createStudentForm">
-        <h1 appTitleFontSize>Alta de Estudiantes</h1>
-        <form [formGroup]="createStudentForm" (ngSubmit)="saveStudent()">
+<div class="sectionContainer">
+    <h1 appTitleFontSize>Alta de Estudiantes</h1>
+    <form class="formContainer" [formGroup]="createStudentForm" (ngSubmit)="saveStudent()">
 
-            <div>
-                <mat-form-field appearance="fill">
-                    <mat-label for="name">Nombre</mat-label>
-                    <input matInput type="text" id="name" formControlName="name" placeholder="Nombre">
-                    <mat-error *ngIf="createStudentForm.get('name')?.errors?.['required']" selected>Nombre es
-                        requerido</mat-error>
-                    <mat-error *ngIf="createStudentForm.get('name')?.errors?.['whitespace']" selected>Nombre
-                        no puede ser vacio</mat-error>
-                    <mat-error *ngIf="createStudentForm.get('name')?.errors?.['minlength']" selected>Nombre menor a 3
-                        caracteres</mat-error>
-                    <mat-error *ngIf="createStudentForm.get('name')?.errors?.['maxlength']" selected>Nombre mayor a 15
-                        caracteres</mat-error>
-                    <mat-error *ngIf="createStudentForm.get('name')?.errors?.['pattern']" selected>Nombre debe ser solo
-                        letras</mat-error>
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label for="name">Nombre</mat-label>
+                <input matInput type="text" id="name" formControlName="name" placeholder="Nombre">
+                <mat-error *ngIf="createStudentForm.get('name')?.errors?.['required']" selected>Nombre es
+                    requerido</mat-error>
+                <mat-error *ngIf="createStudentForm.get('name')?.errors?.['whitespace']" selected>Nombre
+                    no puede ser vacio</mat-error>
+                <mat-error *ngIf="createStudentForm.get('name')?.errors?.['minlength']" selected>Nombre menor a 3
+                    caracteres</mat-error>
+                <mat-error *ngIf="createStudentForm.get('name')?.errors?.['maxlength']" selected>Nombre mayor a 15
+                    caracteres</mat-error>
+                <mat-error *ngIf="createStudentForm.get('name')?.errors?.['pattern']" selected>Nombre debe ser solo
+                    letras</mat-error>
 
-                </mat-form-field>
-            </div>
+            </mat-form-field>
+        </div>
 
-            <div>
-                <mat-form-field appearance="fill">
-                    <mat-label for="apellido">Apellido</mat-label>
-                    <input matInput type="text" id="apellido" formControlName="lastName" placeholder="Apellido">
-                    <mat-error *ngIf="createStudentForm.get('lastName')?.errors?.['required']" selected>Apellido es
-                        requerido</mat-error>
-                    <mat-error *ngIf="createStudentForm.get('lastName')?.errors?.['whitespace']" selected>
-                        Apellido
-                        no puede ser vacio</mat-error>
-                    <mat-error *ngIf="createStudentForm.get('lastName')?.errors?.['minlength']" selected>Apellido menor
-                        a
-                        3
-                        caracteres</mat-error>
-                    <mat-error *ngIf="createStudentForm.get('lastName')?.errors?.['maxlength']" selected>Apellido mayor
-                        a
-                        15
-                        caracteres</mat-error>
-                    <mat-error *ngIf="createStudentForm.get('lastName')?.errors?.['pattern']" selected>Apellido debe ser
-                        solo
-                        letras</mat-error>
-                </mat-form-field>
-            </div>
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label for="apellido">Apellido</mat-label>
+                <input matInput type="text" id="apellido" formControlName="lastName" placeholder="Apellido">
+                <mat-error *ngIf="createStudentForm.get('lastName')?.errors?.['required']" selected>Apellido es
+                    requerido</mat-error>
+                <mat-error *ngIf="createStudentForm.get('lastName')?.errors?.['whitespace']" selected>
+                    Apellido
+                    no puede ser vacio</mat-error>
+                <mat-error *ngIf="createStudentForm.get('lastName')?.errors?.['minlength']" selected>Apellido menor
+                    a
+                    3
+                    caracteres</mat-error>
+                <mat-error *ngIf="createStudentForm.get('lastName')?.errors?.['maxlength']" selected>Apellido mayor
+                    a
+                    15
+                    caracteres</mat-error>
+                <mat-error *ngIf="createStudentForm.get('lastName')?.errors?.['pattern']" selected>Apellido debe ser
+                    solo
+                    letras</mat-error>
+            </mat-form-field>
+        </div>
 
-            <div>
-                <mat-form-field appearance="fill">
-                    <mat-label for="email">Email</mat-label>
-                    <input matInput type="email" id="email" formControlName="email">
-                    <mat-error *ngIf="createStudentForm.get('email')?.errors?.['required']" selected>Email es
-                        requerido</mat-error>
-                    <mat-error *ngIf="createStudentForm.get('email')?.errors?.['whitespace']" selected>
-                        Email
-                        no puede ser vacio</mat-error>
-                    <mat-error *ngIf="createStudentForm.get('email')?.errors?.['email']" selected>Email no es valido
-                    </mat-error>
-                </mat-form-field>
-            </div>
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label for="email">Email</mat-label>
+                <input matInput type="email" id="email" formControlName="email">
+                <mat-error *ngIf="createStudentForm.get('email')?.errors?.['required']" selected>Email es
+                    requerido</mat-error>
+                <mat-error *ngIf="createStudentForm.get('email')?.errors?.['whitespace']" selected>
+                    Email
+                    no puede ser vacio</mat-error>
+                <mat-error *ngIf="createStudentForm.get('email')?.errors?.['email']" selected>Email no es valido
+                </mat-error>
+            </mat-form-field>
+        </div>
 
-            <div>
-                <mat-form-field appearance="fill">
-                    <mat-label for="id">Documento</mat-label>
-                    <input matInput type="email" id="id" formControlName="id">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label for="id">Documento</mat-label>
+                <input matInput type="email" id="id" formControlName="id">
 
-                    <mat-error *ngIf="createStudentForm.get('id')?.errors?.['required']" selected>Documento es
-                        requerido</mat-error>
-                    <mat-error *ngIf="createStudentForm.get('id')?.errors?.['whitespace']" selected>
-                        Documento no puede ser vacio</mat-error>
-                    <mat-hint *ngIf="createStudentForm.get('id')?.errors?.['duplicate']" selected>Ya
-                        existe
-                        un estudiante con ese ID</mat-hint>
-                    <mat-error *ngIf="createStudentForm.get('id')?.errors?.['minlength']" selected>Documento es
-                        menor a 7 numeros</mat-error>
-                    <mat-error *ngIf="createStudentForm.get('id')?.errors?.['maxlength']" selected>Documento es
-                        mayor a 15 numeros</mat-error>
-                    <mat-error *ngIf="createStudentForm.get('id')?.errors?.['pattern']" selected>Documento es
-                        Invalido</mat-error>
-
+                <mat-error *ngIf="createStudentForm.get('id')?.errors?.['required']" selected>Documento es
+                    requerido</mat-error>
+                <mat-error *ngIf="createStudentForm.get('id')?.errors?.['whitespace']" selected>
+                    Documento no puede ser vacio</mat-error>
+                <mat-hint *ngIf="createStudentForm.get('id')?.errors?.['duplicate']" selected>Ya
+                    existe
+                    un estudiante con ese ID</mat-hint>
+                <mat-error *ngIf="createStudentForm.get('id')?.errors?.['minlength']" selected>Documento es
+                    menor a 7 numeros</mat-error>
+                <mat-error *ngIf="createStudentForm.get('id')?.errors?.['maxlength']" selected>Documento es
+                    mayor a 15 numeros</mat-error>
+                <mat-error *ngIf="createStudentForm.get('id')?.errors?.['pattern']" selected>Documento es
+                    Invalido</mat-error>
 
 
 
-                </mat-form-field>
 
-            </div>
-            <div>
-                <mat-form-field appearance="fill">
-                    <mat-label>Curso</mat-label>
-                    <mat-select formControlName="course">
-                        <mat-option *ngFor="let course of coursesList" [value]="course">
-                            {{course.name | uppercase}}</mat-option>
-                    </mat-select>
+            </mat-form-field>
 
-                    <mat-error *ngIf="createStudentForm.get('course')?.errors?.['required']" selected>Curso es
-                        requerido</mat-error>
+        </div>
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Curso</mat-label>
+                <mat-select formControlName="course">
+                    <mat-option *ngFor="let course of coursesList" [value]="course">
+                        {{course.name | uppercase}}</mat-option>
+                </mat-select>
+
+                <mat-error *ngIf="createStudentForm.get('course')?.errors?.['required']" selected>Curso es
+                    requerido</mat-error>
 
 
-                </mat-form-field>
-            </div>
-            <button mat-raised-button color="primary" type="submit"
-                [disabled]="!createStudentForm.valid">CARGAR</button>
-        </form>
-    </div>
+            </mat-form-field>
+        </div>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!createStudentForm.valid">CARGAR</button>
+    </form>
 </div>
