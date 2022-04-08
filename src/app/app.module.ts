@@ -17,6 +17,10 @@ import { ModifyStudentComponent } from './components/modify-student/modify-stude
 import { ModifyStudentDialogComponent } from './components/modify-student-dialog/modify-student-dialog.component';
 import { CreateStudentDialogComponent } from './components/create-student-dialog/create-student-dialog.component';
 import { TitleFontSizeDirective } from './directives/title-font-size.directive';
+import { NameStudentDirective } from './directives/name-student.directive';
+import { ModifyCourseComponent } from './components/modify-course/modify-course.component';
+import { ModifyCourseDialogComponent } from './components/modify-course-dialog/modify-course-dialog.component';
+import { LoadingScreenComponent } from './components/loading-screen/loading-screen.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,10 @@ import { TitleFontSizeDirective } from './directives/title-font-size.directive';
     ModifyStudentDialogComponent,
     CreateStudentDialogComponent,
     TitleFontSizeDirective,
+    NameStudentDirective,
+    ModifyCourseComponent,
+    ModifyCourseDialogComponent,
+    LoadingScreenComponent,
   ],
   imports: [
     BrowserModule,
