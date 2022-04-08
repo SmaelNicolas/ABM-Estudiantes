@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataPeople } from 'src/app/class/data';
+import { DataStudent } from 'src/app/class/dataStudents';
+import { DataCourses } from 'src/app/class/dataCourses';
 import { Student } from 'src/app/class/student';
 
 @Component({
@@ -8,7 +9,7 @@ import { Student } from 'src/app/class/student';
   styleUrls: ['./list-students.component.css'],
 })
 export class ListStudentsComponent implements OnInit {
-  STUDENT_DATA: Student[] = DataPeople.getStudentList();
+  STUDENT_DATA: Student[] = DataStudent.getStudentList();
 
   displayedColumns: string[] = [
     'position',
@@ -23,4 +24,8 @@ export class ListStudentsComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  getImage(name: string): string {
+    return DataCourses.getCourse(name).imageUrl;
+  }
 }
