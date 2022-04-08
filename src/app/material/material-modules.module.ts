@@ -15,6 +15,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [],
@@ -35,6 +38,9 @@ import { MatTableModule } from '@angular/material/table';
     MatSelectModule,
     MatDialogModule,
     MatTableModule,
+    MatButtonToggleModule,
+    MatRadioModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class MaterialModulesModule {}
