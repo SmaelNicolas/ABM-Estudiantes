@@ -1,14 +1,3 @@
-.listCoursesContainer {
-  width: 100%;
-  min-height: 90%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 40px;
-  padding-bottom: 15px;
-}
-
 .cardsContainer {
   width: 100%;
   height: 100%;

@@ -1,13 +1,3 @@
-.listStudentsContainer {
-  width: 100%;
-  min-height: 90%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding-top: 50px;
-}
-
 table {
   width: 90%;
 }

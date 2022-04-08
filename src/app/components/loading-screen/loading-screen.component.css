@@ -7,4 +7,6 @@
   position: absolute;
   z-index: 1000;
   background-color: white;
+  overflow-y: hidden;
+  margin-top: 50px;
 }
