@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 
-import { DataPeople } from 'src/app/class/data';
+import { DataStudent } from 'src/app/class/dataStudents';
 import { Student } from 'src/app/class/student';
 import { DeleteStudentDialogComponent } from '../delete-student-dialog/delete-student-dialog.component';
 
@@ -51,10 +51,10 @@ export class DeleteStudentComponent implements OnInit {
 
   deleteStudent() {
     let id: number = parseInt(this.deleteStudentForm.get('id')!.value);
-    let student: Student | undefined = DataPeople.getStudent(id);
+    let student: Student | undefined = DataStudent.getStudent(id);
 
     if (student !== undefined) {
-      DataPeople.deleteStudent(id);
+      DataStudent.deleteStudent(id);
       this.openDialog(student);
       this.deleteStudentForm.reset();
     } else {
