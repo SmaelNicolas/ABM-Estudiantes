@@ -1,4 +1,5 @@
 <div class="navbarContainer">
+    <div *ngIf="start">{{showLoginHandler()}}</div>
 
     <div class="navbarIconContainer">
         <mat-icon *ngIf="opened" color="accent" class="sidenavButton" mat-button (click)="sidenav.toggle() ; close() ">
@@ -19,23 +20,29 @@
              ">
                 <mat-icon color="accent" class="sectionIcon">check_circle_outline</mat-icon> <span class="sectionText">
                     Alta
-                    Alumno</span>
+                    Estudiantes</span>
             </p>
             <mat-divider></mat-divider>
             <p class="sections" (click)="sidenav.close() ; close() ; showDeleteStudentHandler()">
                 <mat-icon color="accent" class="sectionIcon">highlight_off</mat-icon> <span class="sectionText"> Baja
-                    Alumno</span>
+                    Estudiantes</span>
             </p>
-            <mat-divider></mat-divider>
             <mat-divider></mat-divider>
             <p class="sections" (click)="sidenav.close() ; close() ; showModifyStudentHandler()">
                 <mat-icon color="accent" class="sectionIcon">create</mat-icon> <span class="sectionText">
                     Modificar
-                    Alumno</span>
+                    Estudiantes</span>
+            </p>
+            <mat-divider></mat-divider>
+            <p class="sections" (click)="sidenav.close() ; close() ; showModifyCoursesHandler()">
+                <mat-icon color="accent" class="sectionIcon">create</mat-icon> <span class="sectionText">
+                    Modificar
+                    Curso</span>
             </p>
             <mat-divider></mat-divider>
             <p class="sections" (click)="sidenav.close() ; close(); showListStudentsHandler()">
-                <mat-icon color="accent" class="sectionIcon">group</mat-icon> <span class="sectionText"> Lista Alumnos
+                <mat-icon color="accent" class="sectionIcon">group</mat-icon> <span class="sectionText"> Lista
+                    Estudiantes
                 </span>
             </p>
             <mat-divider></mat-divider>
