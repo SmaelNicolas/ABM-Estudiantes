@@ -6,15 +6,18 @@
     <app-loading-screen *ngIf="showLoading"></app-loading-screen>
 
 
-    <app-navbar-lateral [(showCreateStudent)]="showCreateStudent" [(showDeleteStudent)]="showDeleteStudent"
-        [(showModifyStudent)]="showModifyStudent" [(showModifyCourses)]="showModifyCourses"
-        [(showListStudents)]="showListStudents" [(showListCourses)]="showListCourses" [(showLogin)]="showLogin"
-        [(showLoading)]="showLoading">
+    <app-navbar-lateral *ngIf="showNavbar" [(showCreateStudent)]="showCreateStudent"
+        [(showDeleteStudent)]="showDeleteStudent" [(showModifyStudent)]="showModifyStudent"
+        [(showModifyCourses)]="showModifyCourses" [(showListStudents)]="showListStudents"
+        [(showListCourses)]="showListCourses" [(showLogin)]="showLogin" [(showLoading)]="showLoading"
+        [(logInStudent)]="logInStudent" [(showNavbar)]="showNavbar">
     </app-navbar-lateral>
 
 
     <app-create-student *ngIf="showCreateStudent"></app-create-student>
-    <app-login *ngIf="showLogin"></app-login>
+    <app-login *ngIf="showLogin" [(showNavbar)]="showNavbar" [(showLoading)]="showLoading" [(showLogin)]="showLogin"
+        [(logInStudent)]="logInStudent">
+    </app-login>
     <app-delete-student *ngIf="showDeleteStudent"></app-delete-student>
     <app-modify-student *ngIf="showModifyStudent"></app-modify-student>
     <app-modify-course *ngIf="showModifyCourses"></app-modify-course>

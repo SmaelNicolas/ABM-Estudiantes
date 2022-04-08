@@ -14,8 +14,11 @@ export class AppComponent implements OnInit {
   showModifyCourses: boolean = false;
   showListStudents: boolean = false;
   showListCourses: boolean = false;
-  showLogin: boolean = false;
-  showLoading: boolean = true;
+  showLogin: boolean = true;
+  showLoading: boolean = false;
+  showNavbar: boolean = false;
+
+  logInStudent: boolean = false;
 
   constructor() {}
   ngOnInit() {}
