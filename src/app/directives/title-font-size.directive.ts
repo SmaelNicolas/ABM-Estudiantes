@@ -5,7 +5,10 @@ import { Directive, ElementRef } from '@angular/core';
 })
 export class TitleFontSizeDirective {
   constructor(private element: ElementRef) {
-    element.nativeElement.style.fontSize = '20px';
-    element.nativeElement.style.textDecoration = 'underline';
+    let style = element.nativeElement.style;
+    style.fontSize = '20px';
+    style.textTransform = 'uppercase';
+    style.fontWeight = '600';
+    style.color = '#673ab7';
   }
 }
