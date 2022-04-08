@@ -2,6 +2,9 @@
     <h2 appTitleFontSize>Modificar Estudiante</h2>
     <div class="modifyStudentFormContainer">
 
+        <div *ngIf="getStudentFromForm() !== undefined" appNameStudent>Modificar: {{getStudentFromForm().lastName}}
+            {{getStudentFromForm().name}} </div>
+
         <form *ngIf="!modify" [formGroup]="checkStudentForm" class="modifyStudentForm" (ngSubmit)="canModify()">
             <div>
                 <mat-form-field appearance="fill">

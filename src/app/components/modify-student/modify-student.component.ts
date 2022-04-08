@@ -8,7 +8,8 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 
 import { Courses } from 'src/app/class/courses';
-import { DataPeople } from 'src/app/class/data';
+import { DataStudent } from 'src/app/class/dataStudents';
+import { DataCourses } from 'src/app/class/dataCourses';
 import { Student } from 'src/app/class/student';
 import { ModifyStudentDialogComponent } from '../modify-student-dialog/modify-student-dialog.component';
 
@@ -23,7 +24,7 @@ export class ModifyStudentComponent implements OnInit {
   newFormCourses!: FormGroup;
   validStudent: boolean = true;
   modify: boolean = false;
-  courses: Courses[] = DataPeople.getCoursesList();
+  courses: Courses[] = DataCourses.getCoursesList();
 
   constructor(
     public studentCheckForm: FormBuilder,
@@ -43,22 +44,16 @@ export class ModifyStudentComponent implements OnInit {
 
     this.modifyStudentForm = this.studentModifyForm.group({
       name: new FormControl('', [
-        Validators.required,
-        this.noWhitespaceValidator,
         Validators.minLength(3),
         Validators.maxLength(15),
         Validators.pattern('[a-zA-Z ]*'),
       ]),
       lastName: new FormControl('', [
-        Validators.required,
-        this.noWhitespaceValidator,
         Validators.minLength(3),
         Validators.maxLength(15),
         Validators.pattern('[a-zA-Z ]*'),
       ]),
       email: new FormControl('', [
-        Validators.required,
-        this.noWhitespaceValidator,
         Validators.email,
         Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
       ]),
@@ -103,9 +98,15 @@ export class ModifyStudentComponent implements OnInit {
     return parseInt(this.checkStudentForm.get('id')!.value);
   }
 
+  getStudentFromForm(): Student {
+    return DataStudent.getStudent(
+      parseInt(this.checkStudentForm.get('id')!.value)
+    );
+  }
+
   canModify(): void {
     let id: number = this.getIdFromForm();
-    let student: Student = DataPeople.getStudent(id);
+    let student: Student = DataStudent.getStudent(id);
 
     if (student !== undefined) {
       this.modify = true;
@@ -129,11 +130,10 @@ export class ModifyStudentComponent implements OnInit {
   }
 
   updateStudent(): void {
-    let id: number = this.getIdFromForm();
-    let student: Student = DataPeople.getStudent(id);
+    let student: Student = this.getStudentFromForm();
     if (student !== undefined) {
       this.createStudentFromModifyForm(student);
-      DataPeople.replaceStudent(student);
+      DataStudent.replaceStudent(student);
       this.openDialog(student);
       this.checkStudentForm.reset();
       this.modify = false;
@@ -146,9 +146,21 @@ export class ModifyStudentComponent implements OnInit {
   }
 
   createStudentFromModifyForm(student: Student): void {
-    student.name = this.modifyStudentForm.get('name')!.value;
-    student.lastName = this.modifyStudentForm.get('lastName')!.value;
-    student.email = this.modifyStudentForm.get('email')!.value;
+    student.name =
+      this.modifyStudentForm.get('name')!.value !== undefined &&
+      this.modifyStudentForm.get('name')!.value !== ''
+        ? this.modifyStudentForm.get('name')!.value
+        : student.name;
+    student.lastName =
+      this.modifyStudentForm.get('lastName')!.value !== undefined &&
+      this.modifyStudentForm.get('lastName')!.value !== ''
+        ? this.modifyStudentForm.get('lastName')!.value
+        : student.lastName;
+    student.email =
+      this.modifyStudentForm.get('email')!.value !== undefined &&
+      this.modifyStudentForm.get('email')!.value !== ''
+        ? this.modifyStudentForm.get('email')!.value
+        : student.email;
     student.courses = this.createNewArrayCourses();
   }
 }
