@@ -86,7 +86,7 @@
             <mat-form-field appearance="fill">
                 <mat-label>Curso</mat-label>
                 <mat-select formControlName="course">
-                    <mat-option *ngFor="let course of coursesList" [value]="course">
+                    <mat-option *ngFor="let course of coursesList$" [value]="course">
                         {{course.name | uppercase}}</mat-option>
                 </mat-select>
 
