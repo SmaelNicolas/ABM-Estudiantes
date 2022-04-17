@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map, of } from 'rxjs';
 import { Courses } from '../class/courses';
 import { Student } from '../class/student';
+import { StudentsService } from './students.service';
 
 @Injectable({
   providedIn: 'root',
@@ -48,7 +49,7 @@ export class CoursesService {
 
   coursesList$!: Observable<Courses[]>;
 
-  constructor() {
+  constructor(private studentService: StudentsService) {
     this.coursesList$ = new Observable((suscription) => {
       suscription.next(this.coursesList);
     });
@@ -91,17 +92,18 @@ export class CoursesService {
     course.isAvailable = !course.isAvailable;
   }
 
-  canDeleteCourse(name: string): Observable<boolean> {
+  canDeleteCourse(name: string): boolean {
     let course = this.coursesList.find((course) => course.name === name)!;
-    let studenList: Student[] = [];
-    let isStudentInCourse: boolean = false;
-    studenList.forEach((student) => {
-      student.courses.includes(course.name) ? (isStudentInCourse = true) : null;
+
+    //if a student is enrolled in name course, the course cannot be deleted
+    let studentList!: Student[];
+    this.studentService.getStudentList().subscribe((students) => {
+      studentList = students;
     });
-    if (isStudentInCourse) {
-      return of(false);
-    } else {
-      return of(true);
-    }
+    let isInCourse: boolean = false;
+    studentList.forEach((student) => {
+      student.courses.includes(course.name) ? (isInCourse = true) : null;
+    });
+    return !isInCourse;
   }
 }
