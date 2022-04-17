@@ -70,14 +70,12 @@ export class CreateStudentComponent implements OnInit, OnDestroy {
       .getStudentList()
       .subscribe((data) => {
         this.studentList$ = data;
-        console.log(this.studentList$);
       });
 
     this.suscriberCourses = this.courseService
       .getCoursesList()
       .subscribe((data) => {
         this.coursesList$ = data;
-        console.log(this.coursesList$);
       });
   }
   noWhitespaceValidator(control: FormControl) {
