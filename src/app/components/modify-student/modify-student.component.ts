@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -8,9 +8,9 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 
 import { Courses } from 'src/app/class/courses';
-import { DataStudent } from 'src/app/class/dataStudents';
-import { DataCourses } from 'src/app/class/dataCourses';
 import { Student } from 'src/app/class/student';
+import { CoursesService } from 'src/app/services/courses.service';
+import { StudentsService } from 'src/app/services/students.service';
 import { ModifyStudentDialogComponent } from '../modify-student-dialog/modify-student-dialog.component';
 
 @Component({
@@ -18,19 +18,23 @@ import { ModifyStudentDialogComponent } from '../modify-student-dialog/modify-st
   templateUrl: './modify-student.component.html',
   styleUrls: ['./modify-student.component.css'],
 })
-export class ModifyStudentComponent implements OnInit {
+export class ModifyStudentComponent implements OnInit, OnDestroy {
   checkStudentForm!: FormGroup;
   modifyStudentForm!: FormGroup;
   newFormCourses!: FormGroup;
   validStudent: boolean = true;
   modify: boolean = false;
-  courses: Courses[] = DataCourses.getCoursesList();
+  courses!: Courses[];
+
+  courseSuscriber: any;
 
   constructor(
     public studentCheckForm: FormBuilder,
     public studentModifyForm: FormBuilder,
     public newCoursesModifyForm: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private studentService: StudentsService,
+    private coursesService: CoursesService
   ) {
     this.checkStudentForm = this.studentCheckForm.group({
       id: new FormControl('', [
@@ -66,7 +70,13 @@ export class ModifyStudentComponent implements OnInit {
     return isValid ? null : { whitespace: true };
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.courseSuscriber = this.coursesService
+      .getCoursesList()
+      .subscribe((courses) => {
+        this.courses = courses;
+      });
+  }
 
   openDialog(s: Student) {
     this.dialog.open(ModifyStudentDialogComponent, {
@@ -99,7 +109,13 @@ export class ModifyStudentComponent implements OnInit {
   }
 
   getStudentFromForm(): Student {
-    return DataStudent.getStudent(this.getIdFromForm());
+    let stud!: Student;
+    this.studentService
+      .getStudent(this.getIdFromForm())
+      .subscribe((student) => {
+        stud = student;
+      });
+    return stud;
   }
 
   canModify(): void {
@@ -130,7 +146,7 @@ export class ModifyStudentComponent implements OnInit {
     let student: Student = this.getStudentFromForm();
     if (student !== undefined) {
       this.createStudentFromModifyForm(student);
-      DataStudent.replaceStudent(student);
+      this.studentService.replaceStudent(student);
       this.openDialog(student);
       this.checkStudentForm.reset();
       this.modify = false;
@@ -159,5 +175,9 @@ export class ModifyStudentComponent implements OnInit {
         ? this.modifyStudentForm.get('email')!.value
         : student.email;
     student.courses = this.createNewArrayCourses();
+  }
+
+  ngOnDestroy(): void {
+    this.courseSuscriber.unsubscribe();
   }
 }
