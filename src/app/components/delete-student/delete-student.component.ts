@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -7,8 +7,8 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 
-import { DataStudent } from 'src/app/class/dataStudents';
 import { Student } from 'src/app/class/student';
+import { StudentsService } from 'src/app/services/students.service';
 import { DeleteStudentDialogComponent } from '../delete-student-dialog/delete-student-dialog.component';
 
 @Component({
@@ -16,11 +16,16 @@ import { DeleteStudentDialogComponent } from '../delete-student-dialog/delete-st
   templateUrl: './delete-student.component.html',
   styleUrls: ['./delete-student.component.css'],
 })
-export class DeleteStudentComponent implements OnInit {
+export class DeleteStudentComponent implements OnInit, OnDestroy {
   deleteStudentForm!: FormGroup;
   validStudent: boolean = true;
+  suscriberStudent!: any;
 
-  constructor(public studentAddForm: FormBuilder, public dialog: MatDialog) {
+  constructor(
+    public studentAddForm: FormBuilder,
+    public dialog: MatDialog,
+    private studentService: StudentsService
+  ) {
     this.deleteStudentForm = this.studentAddForm.group({
       id: new FormControl('', [
         Validators.required,
@@ -32,7 +37,9 @@ export class DeleteStudentComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.suscriberStudent = this.studentService.getStudentList().subscribe();
+  }
 
   public noWhitespaceValidator(control: FormControl) {
     const isWhitespace = (control.value || '').trim().length === 0;
@@ -51,10 +58,11 @@ export class DeleteStudentComponent implements OnInit {
 
   deleteStudent() {
     let id: number = parseInt(this.deleteStudentForm.get('id')!.value);
-    let student: Student | undefined = DataStudent.getStudent(id);
+    let student!: Student;
+    this.studentService.getStudent(id).subscribe((data) => (student = data));
 
     if (student !== undefined) {
-      DataStudent.deleteStudent(id);
+      this.studentService.deleteStudent(id);
       this.openDialog(student);
       this.deleteStudentForm.reset();
     } else {
@@ -63,5 +71,9 @@ export class DeleteStudentComponent implements OnInit {
         this.validStudent = true;
       }, 3000);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.suscriberStudent.unsubscribe();
   }
 }
