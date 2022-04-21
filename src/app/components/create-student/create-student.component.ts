@@ -25,6 +25,7 @@ export class CreateStudentComponent implements OnInit, OnDestroy {
   suscriberCourses: any;
   studentList$!: Student[];
   coursesList$!: Courses[];
+  coursesAvailablesList$!: Courses[];
 
   constructor(
     public studentAddForm: FormBuilder,
@@ -76,7 +77,11 @@ export class CreateStudentComponent implements OnInit, OnDestroy {
       .getCoursesList()
       .subscribe((data) => {
         this.coursesList$ = data;
+        this.coursesAvailablesList$ = data.filter(
+          (course) => course.isAvailable === true
+        );
       });
+    console.log(this.coursesAvailablesList$);
   }
   noWhitespaceValidator(control: FormControl) {
     let isWhitespace = (control.value || '').trim().length === 0;

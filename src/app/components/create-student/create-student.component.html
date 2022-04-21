@@ -86,8 +86,8 @@
             <mat-form-field appearance="fill">
                 <mat-label>Curso</mat-label>
                 <mat-select formControlName="course">
-                    <mat-option *ngFor="let course of coursesList$" [value]="course">
-                        {{course.name | uppercase}}</mat-option>
+                    <mat-option *ngFor="let course of coursesAvailablesList$" [value]="course">
+                        {{ course.name | uppercase}}</mat-option>
                 </mat-select>
 
                 <mat-error *ngIf="createStudentForm.get('course')?.errors?.['required']" selected>Curso es
