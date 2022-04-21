@@ -21,6 +21,12 @@ import { NameStudentDirective } from './directives/name-student.directive';
 import { ModifyCourseComponent } from './components/modify-course/modify-course.component';
 import { ModifyCourseDialogComponent } from './components/modify-course-dialog/modify-course-dialog.component';
 import { LoadingScreenComponent } from './components/loading-screen/loading-screen.component';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './components/home/home.component';
+import { StudentsService } from './services/students.service';
+import { CoursesService } from './services/courses.service';
+import { AdminsService } from './services/admins.service';
+import { AppService } from './services/app.service';
 
 @NgModule({
   declarations: [
@@ -41,6 +47,7 @@ import { LoadingScreenComponent } from './components/loading-screen/loading-scre
     ModifyCourseComponent,
     ModifyCourseDialogComponent,
     LoadingScreenComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,8 +55,9 @@ import { LoadingScreenComponent } from './components/loading-screen/loading-scre
     MaterialModulesModule,
     FormsModule,
     ReactiveFormsModule,
+    AppRoutingModule,
   ],
-  providers: [],
+  providers: [StudentsService, CoursesService, AdminsService, AppService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
