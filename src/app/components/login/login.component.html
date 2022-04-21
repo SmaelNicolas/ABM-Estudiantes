@@ -1,9 +1,8 @@
 <div class="sectionContainer ">
-    <div *ngIf="start">{{showLoadingHandler()}}</div>
 
     <h2 appTitleFontSize>Iniciar Sesion</h2>
 
-    <form (ngSubmit)="logUser()" [formGroup]="loginForm" class="formContainer">
+    <form [formGroup]="loginForm" class="formContainer">
 
 
         <div>
@@ -43,11 +42,9 @@
             </mat-form-field>
         </div>
 
-        <button class="buttonLogin" mat-raised-button color="primary" type="submit"
-            (click)="clickStudentHandler()">Ingresar como
+        <button class="buttonLogin" routerLink="/home" mat-raised-button color="primary" type="submit">Ingresar como
             ESTUDIANTE</button>
-        <button class="buttonLogin" mat-raised-button color="warn" type="submit"
-            (click)="clickAdminHandler() ; ">Ingrsar
+        <button class="buttonLogin" routerLink="/home" mat-raised-button color="warn" type="submit">Ingrsar
             como
             ADMINISTRADOR</button>
 
