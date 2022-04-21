@@ -19,20 +19,6 @@ export class LoginComponent implements OnInit {
   clickAdmin: boolean = false;
   // logInStudent: boolean = false;
 
-  @Input() showNavbar: any;
-  @Input() showLoading: any;
-  @Input() showLogin: any;
-  @Input() logInStudent: any;
-
-  @Output()
-  showNavbarChange = new EventEmitter<any>();
-  @Output()
-  showLoadingChange = new EventEmitter<any>();
-  @Output()
-  showLoginChange = new EventEmitter<any>();
-  @Output()
-  logInStudentChange = new EventEmitter<any>();
-
   constructor(public lf: FormBuilder) {
     this.loginForm = this.lf.group({
       email: new FormControl('', [
@@ -66,25 +52,5 @@ export class LoginComponent implements OnInit {
   public clickAdminHandler() {
     this.clickStudent = false;
     this.clickAdmin = true;
-  }
-
-  showNavbarHandler() {
-    this.showNavbarChange.emit(true);
-  }
-
-  public logUser() {
-    if (this.clickStudent) {
-      this.logInStudentChange.emit(true);
-    }
-    this.showNavbarHandler();
-    this.showLoginChange.emit(false);
-  }
-
-  showLoadingHandler() {
-    this.showLoadingChange.emit(true);
-    setTimeout(() => {
-      this.showLoadingChange.emit(false);
-    }, 1500);
-    this.start = false;
   }
 }
