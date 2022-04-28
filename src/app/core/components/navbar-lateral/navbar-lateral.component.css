@@ -1,0 +1,53 @@
+.navbarContainer {
+  width: 100%;
+  min-height: 90%;
+  position: absolute;
+}
+.navbarIconContainer {
+  width: 100%;
+  background-color: #673ab7;
+  height: 28px;
+}
+.sidenavButton {
+  margin-left: 10px;
+  cursor: pointer;
+}
+.sidenav {
+  width: 100%;
+
+  min-height: 100%;
+  background-color: transparent;
+  position: absolute;
+}
+.show {
+  display: flex;
+}
+.hide {
+  display: none;
+}
+
+.sidenavContent {
+  width: 200px;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #673ab7;
+}
+
+.sections {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  cursor: pointer;
+  padding: 10px 0 0 15px;
+}
+
+.sectionIcon {
+  padding-right: 10px;
+}
+
+.sectionText {
+  color: white;
+  letter-spacing: 0.5px;
+}

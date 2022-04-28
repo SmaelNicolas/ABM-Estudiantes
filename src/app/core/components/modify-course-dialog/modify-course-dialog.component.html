@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content *ngIf="data.action === 'noDelete'">Existen estudiantes en el curso {{data.course | uppercase}}
+</div>
+<div mat-dialog-content *ngIf="data.action === 'noDelete'">Primero realize la baja de los estudiantes del curso
+    {{data.course
+    | uppercase}}
+</div>
+<div mat-dialog-content *ngIf="data.action === 'delete'">Curso de {{data.course | uppercase }} eliminado correctamente
+</div>
+<div mat-dialog-content *ngIf="data.action === 'availability'">Disponibilidad de {{data.course | uppercase}} modificada
+    correctamente
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cerrar</button>
+</div>
