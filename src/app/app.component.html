@@ -1,27 +1,7 @@
 <div class="appContainer">
     <app-toolbar></app-toolbar>
-    <app-navbar-lateral>
+    <app-navbar-lateral *ngIf="getRoute() !== '/'">
     </app-navbar-lateral>
-    <!-- <app-navbar-lateral-students></app-navbar-lateral-students> -->
     <router-outlet></router-outlet>
-
-    <!-- <app-loading-screen *ngIf="showLoading"></app-loading-screen> -->
-    <!-- <app-navbar-lateral *ngIf="showNavbar" [(showCreateStudent)]="showCreateStudent"
-        [(showDeleteStudent)]="showDeleteStudent" [(showModifyStudent)]="showModifyStudent"
-        [(showModifyCourses)]="showModifyCourses" [(showListStudents)]="showListStudents"
-        [(showListCourses)]="showListCourses" [(showLogin)]="showLogin" [(showLoading)]="showLoading"
-        [(logInStudent)]="logInStudent" [(showNavbar)]="showNavbar">
-    </app-navbar-lateral> -->
-    <!-- <app-login *ngIf="showLogin" [(showNavbar)]="showNavbar" [(showLoading)]="showLoading" [(showLogin)]="showLogin"
-        [(logInStudent)]="logInStudent">
-    </app-login> -->
-    <!-- <app-create-student *ngIf="showCreateStudent"></app-create-student>
-    <app-delete-student *ngIf="showDeleteStudent"></app-delete-student>
-    <app-modify-student *ngIf="showModifyStudent"></app-modify-student>
-    <app-modify-course *ngIf="showModifyCourses"></app-modify-course>
-    <app-list-students *ngIf="showListStudents"></app-list-students>
-    <app-list-courses *ngIf="showListCourses"></app-list-courses> -->
-
-
 
 </div>

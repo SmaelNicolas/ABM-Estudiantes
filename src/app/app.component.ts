@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,19 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'ProyectoFinal';
+  router!: string;
 
-  showCreateStudent: boolean = false;
-  showDeleteStudent: boolean = false;
-  showModifyStudent: boolean = false;
-  showModifyCourses: boolean = false;
-  showListStudents: boolean = false;
-  showListCourses: boolean = false;
-  showLogin: boolean = true;
-  showLoading: boolean = false;
-  showNavbar: boolean = false;
-
-  logInStudent: boolean = false;
-
-  constructor() {}
+  constructor(private _router: Router) {}
   ngOnInit() {}
+
+  getRoute() {
+    this.router = this._router.url;
+    return this.router;
+  }
 }
