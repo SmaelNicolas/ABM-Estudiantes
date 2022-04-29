@@ -1,6 +1,6 @@
 <div class="appContainer">
     <app-toolbar></app-toolbar>
-    <app-navbar-lateral *ngIf="getRoute() !== '/'">
+    <app-navbar-lateral *ngIf="getRoute() !== '/' && getRoute() !== '/login' ">
     </app-navbar-lateral>
     <router-outlet></router-outlet>
 

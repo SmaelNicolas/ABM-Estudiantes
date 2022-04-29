@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'estudiantes/altaEstudiante', component: CreateStudentComponent },
   { path: 'estudiantes', component: ListStudentsComponent },
   { path: 'login', component: LoginComponent },
-  { path: '**', component: LoginComponent },
+  { path: '**', redirectTo: 'login', pathMatch: 'full' },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 
