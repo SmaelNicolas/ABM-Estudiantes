@@ -1,0 +1,43 @@
+<div class="sectionContainer">
+    <mat-tab-group>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <p [routerLink]="'alta'" class="sections">
+                    <mat-icon routerLinkActive="router-link-active" color="primary" class="sectionIcon">
+                        check_circle_outline
+                    </mat-icon> <span class="sectionText">
+                        Alta
+                        Estudiantes</span>
+                </p>
+            </ng-template>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <p [routerLink]="'baja'" class="sections">
+                    <mat-icon color="primary" class="sectionIcon">highlight_off</mat-icon> <span class="sectionText">
+                        Baja
+                        Estudiantes</span>
+                </p>
+            </ng-template>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <p [routerLink]="'modificar'" class="sections">
+                    <mat-icon color="primary" class="sectionIcon">create</mat-icon> <span class="sectionText">
+                        Modificar
+                        Estudiantes</span>
+                </p>
+            </ng-template>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <p [routerLink]="'lista'" class="sections">
+                    <mat-icon color="primary" class="sectionIcon">people</mat-icon> <span class="sectionText">
+                        Lista
+                        Estudiantes</span>
+                </p>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+<router-outlet></router-outlet>

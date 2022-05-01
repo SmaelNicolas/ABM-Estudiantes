@@ -1,59 +1,31 @@
 <div class="navbarContainer">
 
     <div class="navbarIconContainer">
-        <mat-icon *ngIf="opened" color="accent" class="sidenavButton" mat-button (click)="sidenav.toggle() ; close() ">
+        <mat-icon *ngIf="opened" color="primary" class="sidenavButton" mat-button (click)="sidenav.toggle() ; close() ">
             chevron_left
         </mat-icon>
-        <mat-icon *ngIf="!opened" color="accent" class="sidenavButton" mat-button (click)="sidenav.toggle() ; open()">
+        <mat-icon *ngIf="!opened" color="primary" class="sidenavButton" mat-button (click)="sidenav.toggle() ; open()">
             chevron_right
         </mat-icon>
     </div>
 
     <mat-sidenav-container class="sidenav" [ngClass]="opened ? 'show' : 'hide'" (click)="sidenav.close() ; close()">
-        <div *ngIf="start">
-            {{firstRender()}}
-            {{ sidenav.toggle()}} {{open()}}
-
-        </div>
-
         <mat-sidenav #sidenav mode="over" (opened)="events.push('open!')" (closed)="events.push('close!');close()"
             class="sidenavContent">
             <mat-divider></mat-divider>
 
-            <p [routerLink]="'estudiantes/altaEstudiante'" class="sections" (click)="sidenav.close() ; close()
+            <p [routerLink]="'estudiantes'" class="sections" (click)="sidenav.close() ; close()
              ">
                 <mat-icon routerLinkActive="router-link-active" color="accent" class="sectionIcon">check_circle_outline
                 </mat-icon> <span class="sectionText">
-                    Alta
+                    ABM
                     Estudiantes</span>
             </p>
             <mat-divider></mat-divider>
-            <p [routerLink]="'estudiantes/bajaEstudiante'" class="sections" (click)="sidenav.close() ; close() ">
-                <mat-icon color="accent" class="sectionIcon">highlight_off</mat-icon> <span class="sectionText"> Baja
-                    Estudiantes</span>
-            </p>
-            <mat-divider></mat-divider>
-            <p [routerLink]="'estudiantes/modificarEstudiante'" class="sections" (click)="sidenav.close() ; close() ">
+            <p [routerLink]="'cursos'" class="sections" (click)="sidenav.close() ; close() ">
                 <mat-icon color="accent" class="sectionIcon">create</mat-icon> <span class="sectionText">
-                    Modificar
-                    Estudiantes</span>
-            </p>
-            <mat-divider></mat-divider>
-            <p [routerLink]="'cursos/modificarCursos'" class="sections" (click)="sidenav.close() ; close() ">
-                <mat-icon color="accent" class="sectionIcon">create</mat-icon> <span class="sectionText">
-                    Modificar
-                    Curso</span>
-            </p>
-            <mat-divider></mat-divider>
-            <p class="sections" [routerLink]="'estudiantes'" (click)="sidenav.close() ; close()">
-                <mat-icon color="accent" class="sectionIcon">group</mat-icon> <span class="sectionText"> Lista
-                    Estudiantes
-                </span>
-            </p>
-            <mat-divider></mat-divider>
-            <p class="sections" [routerLink]="'cursos'" (click)="sidenav.close() ; close() ">
-                <mat-icon color="accent" class="sectionIcon">list_alt</mat-icon> <span class="sectionText"> Lista Cursos
-                </span>
+                    ABM
+                    Cursos</span>
             </p>
 
             <mat-divider></mat-divider>

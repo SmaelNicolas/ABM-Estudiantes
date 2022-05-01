@@ -1,0 +1,8 @@
+.modifyStudentsInputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.modifyStudentChecksContainer {
+  margin: 12px 0;
+}

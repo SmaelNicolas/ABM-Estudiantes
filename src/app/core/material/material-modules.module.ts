@@ -18,6 +18,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [],
@@ -41,6 +42,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatButtonToggleModule,
     MatRadioModule,
     MatProgressSpinnerModule,
+    MatTabsModule,
   ],
   exports: [
     MatButtonModule,
@@ -61,6 +63,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatButtonToggleModule,
     MatRadioModule,
     MatProgressSpinnerModule,
+    MatTabsModule,
   ],
 })
 export class MaterialModulesModule {}
