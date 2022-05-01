@@ -1,0 +1,31 @@
+<div class="sectionContainer">
+    <h2 appTitleFontSize>Lista de Cursos </h2>
+
+    <div class="cardsContainer">
+
+        <div class="courseCardContainer" *ngFor="let course of courses">
+
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>{{course.name | uppercase}}</mat-card-title>
+                </mat-card-header>
+                <img mat-card-lg-image src="{{course.imageUrl}}" alt="Photo of a course">
+                <mat-card-content>
+                    <p class="cardDescription">
+                        {{course.description}}
+                    </p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button color="primary">
+                        {{course.isAvailable ? 'Disponible' : 'No Disponible'}}
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+
+
+
+
+</div>

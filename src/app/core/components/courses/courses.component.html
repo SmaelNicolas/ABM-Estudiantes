@@ -1,0 +1,23 @@
+<div class="sectionContainer">
+    <mat-tab-group>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <p [routerLink]="'modificar'" class="sections">
+                    <mat-icon color="primary" class="sectionIcon">create</mat-icon> <span class="sectionText">
+                        Modificar
+                        Curso</span>
+                </p>
+            </ng-template>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <p class="sections" [routerLink]="'lista'">
+                    <mat-icon color="primary" class="sectionIcon">list_alt</mat-icon> <span class="sectionText"> Lista
+                        Cursos
+                    </span>
+                </p>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+<router-outlet></router-outlet>
