@@ -7,25 +7,24 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarLateralComponent } from './core/components/navbar-lateral/navbar-lateral.component';
 import { ToolbarComponent } from './core/components/toolbar/toolbar.component';
-import { NavbarLateralStudentsComponent } from './core/components/navbar-lateral-students/navbar-lateral-students.component';
 import { StudentsService } from './services/students.service';
 import { CoursesService } from './services/courses.service';
 import { AdminsService } from './services/admins.service';
 import { AppService } from './services/app.service';
 import { CoreModule } from './core/core.module';
+import { AppRoutingModule } from './app-routing.module';
+import { StudentsModule } from './core/components/students/students.module';
+import { CoursesModule } from './core/components/courses/courses.module';
+import { MaterialModulesModule } from './core/material/material-modules.module';
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarLateralComponent,
-    ToolbarComponent,
-    NavbarLateralStudentsComponent,
-  ],
+  declarations: [AppComponent, NavbarLateralComponent, ToolbarComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    CoreModule,
+    MaterialModulesModule,
+    AppRoutingModule,
   ],
   providers: [StudentsService, CoursesService, AdminsService, AppService],
   bootstrap: [AppComponent],
