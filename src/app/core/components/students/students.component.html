@@ -2,6 +2,15 @@
     <mat-tab-group>
         <mat-tab>
             <ng-template mat-tab-label>
+                <p [routerLink]="'lista'" class="sections">
+                    <mat-icon color="primary" class="sectionIcon">people</mat-icon> <span class="sectionText">
+                        Lista
+                        Estudiantes</span>
+                </p>
+            </ng-template>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
                 <p [routerLink]="'alta'" class="sections">
                     <mat-icon routerLinkActive="router-link-active" color="primary" class="sectionIcon">
                         check_circle_outline
@@ -29,15 +38,7 @@
                 </p>
             </ng-template>
         </mat-tab>
-        <mat-tab>
-            <ng-template mat-tab-label>
-                <p [routerLink]="'lista'" class="sections">
-                    <mat-icon color="primary" class="sectionIcon">people</mat-icon> <span class="sectionText">
-                        Lista
-                        Estudiantes</span>
-                </p>
-            </ng-template>
-        </mat-tab>
+
     </mat-tab-group>
 </div>
 <router-outlet></router-outlet>
