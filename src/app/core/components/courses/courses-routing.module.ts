@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CoursesComponent } from './courses.component';
 import { ListCoursesComponent } from './list-courses/list-courses.component';
 import { ModifyCourseComponent } from './modify-course/modify-course.component';
+import { AdminGuard } from 'src/app/auth/admin.guard';
 
 const routes: Routes = [
   {
@@ -10,7 +11,11 @@ const routes: Routes = [
     component: CoursesComponent,
     children: [
       { path: 'lista', component: ListCoursesComponent },
-      { path: 'modificar', component: ModifyCourseComponent },
+      {
+        path: 'modificar',
+        canActivate: [AdminGuard],
+        component: ModifyCourseComponent,
+      },
     ],
   },
 ];
