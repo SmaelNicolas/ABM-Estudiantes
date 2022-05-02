@@ -1,10 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AutenticacionService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +21,11 @@ export class LoginComponent implements OnInit {
   clickAdmin: boolean = false;
   // logInStudent: boolean = false;
 
-  constructor(public lf: FormBuilder) {
+  constructor(
+    public lf: FormBuilder,
+    private authService: AutenticacionService,
+    private router: Router
+  ) {
     this.loginForm = this.lf.group({
       email: new FormControl('', [
         Validators.required,
@@ -52,5 +58,13 @@ export class LoginComponent implements OnInit {
   public clickAdminHandler() {
     this.clickStudent = false;
     this.clickAdmin = true;
+  }
+
+  public createUser() {
+    let email: string = this.loginForm.get('email')!.value;
+    let pw: string = this.loginForm.get('password')!.value;
+    this.clickAdmin && this.authService.updateUserIn(email, pw, 'admin');
+    this.clickStudent && this.authService.updateUserIn(email, pw, 'student');
+    this.router.navigate(['home']);
   }
 }

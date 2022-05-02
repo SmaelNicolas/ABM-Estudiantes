@@ -2,8 +2,7 @@
 
     <h2 appTitleFontSize>Iniciar Sesion</h2>
 
-    <form [formGroup]="loginForm" class="formContainer">
-
+    <form (ngSubmit)="createUser()" [formGroup]="loginForm" class="formContainer">
 
         <div>
             <mat-form-field appearance="fill">
@@ -42,9 +41,11 @@
             </mat-form-field>
         </div>
 
-        <button class="buttonLogin" mat-raised-button color="primary" type="submit">Ingresar como
+        <button class="buttonLogin" mat-raised-button color="primary" (click)="clickStudentHandler()" type="submit"
+            [disabled]="!loginForm.valid">Ingresar como
             ESTUDIANTE</button>
-        <button class="buttonLogin" mat-raised-button color="warn" type="submit">Ingrsar
+        <button class="buttonLogin" mat-raised-button color="warn" (click)="clickAdminHandler()" type="submit"
+            [disabled]="!loginForm.valid">Ingrsar
             como
             ADMINISTRADOR</button>
 
