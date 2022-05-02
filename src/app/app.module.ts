@@ -9,13 +9,11 @@ import { NavbarLateralComponent } from './core/components/navbar-lateral/navbar-
 import { ToolbarComponent } from './core/components/toolbar/toolbar.component';
 import { StudentsService } from './services/students.service';
 import { CoursesService } from './services/courses.service';
-import { AdminsService } from './services/admins.service';
 import { AppService } from './services/app.service';
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
-import { StudentsModule } from './core/components/students/students.module';
-import { CoursesModule } from './core/components/courses/courses.module';
 import { MaterialModulesModule } from './core/material/material-modules.module';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 @NgModule({
   declarations: [AppComponent, NavbarLateralComponent, ToolbarComponent],
   imports: [
@@ -25,8 +23,9 @@ import { MaterialModulesModule } from './core/material/material-modules.module';
     ReactiveFormsModule,
     MaterialModulesModule,
     AppRoutingModule,
+    SweetAlert2Module,
   ],
-  providers: [StudentsService, CoursesService, AdminsService, AppService],
+  providers: [StudentsService, CoursesService, AppService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
