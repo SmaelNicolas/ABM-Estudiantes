@@ -11,8 +11,8 @@ import { Student } from 'src/app/class/student';
 import { Courses } from 'src/app/class/courses';
 import { CreateStudentDialogComponent } from '../create-student-dialog/create-student-dialog.component';
 
-import { StudentsService } from 'src/app/services/students.service';
 import { CoursesService } from 'src/app/services/courses.service';
+import { StudentApiService } from 'src/app/services/students-api.service';
 
 @Component({
   selector: 'app-create-student',
@@ -30,8 +30,8 @@ export class CreateStudentComponent implements OnInit, OnDestroy {
   constructor(
     public studentAddForm: FormBuilder,
     public dialog: MatDialog,
-    private studentService: StudentsService,
-    private courseService: CoursesService
+    private courseService: CoursesService,
+    private studentAPIService: StudentApiService
   ) {
     this.createStudentForm = this.studentAddForm.group({
       id: new FormControl('', [
@@ -67,8 +67,8 @@ export class CreateStudentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.suscriberStudent = this.studentService
-      .getStudentList()
+    this.suscriberStudent = this.studentAPIService
+      .getStudents()
       .subscribe((data) => {
         this.studentList$ = data;
       });
@@ -111,21 +111,22 @@ export class CreateStudentComponent implements OnInit, OnDestroy {
   }
 
   saveStudent(): void {
-    let studentToAdd = this.createStudent();
-    this.studentService.addStudent(studentToAdd);
+    let studentToAdd: Student = this.createStudent();
+    this.studentAPIService.saveStudent(studentToAdd);
     this.openDialog(studentToAdd);
     this.createStudentForm.reset();
   }
 
   createStudent(): Student {
-    let id: number = parseInt(this.getValueFromForm('id'));
+    let dni: number = parseInt(this.getValueFromForm('id'));
     let name: string = this.getValueFromForm('name');
     let lastName: string = this.getValueFromForm('lastName');
     let email: string = this.getValueFromForm('email');
     let password: string =
       this.getValueFromForm('lastName') + this.getValueFromForm('id');
-    let course: string = this.getValueFromForm('course').name;
-    return new Student(id, name, lastName, email, password, course);
+    let courses: string = this.getValueFromForm('course').name;
+    let rol: string = 'student';
+    return new Student(dni, name, lastName, email, password, courses);
   }
 
   getValueFromForm(value: string) {

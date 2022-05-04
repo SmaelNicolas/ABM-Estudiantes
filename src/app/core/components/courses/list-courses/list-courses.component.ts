@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Courses } from 'src/app/class/courses';
 import { DataCourses } from 'src/app/class/dataCourses';
+import { CoursesApiService } from 'src/app/services/courses-api.service';
 import { CoursesService } from 'src/app/services/courses.service';
 
 @Component({
@@ -12,11 +13,11 @@ export class ListCoursesComponent implements OnInit, OnDestroy {
   courses!: Courses[];
   coursesSuscriber: any;
 
-  constructor(private coursesService: CoursesService) {}
+  constructor(private cousesAPIService: CoursesApiService) {}
 
   ngOnInit(): void {
-    this.coursesSuscriber = this.coursesService
-      .getCoursesList()
+    this.coursesSuscriber = this.cousesAPIService
+      .getCourses()
       .subscribe((data) => {
         this.courses = data;
       });

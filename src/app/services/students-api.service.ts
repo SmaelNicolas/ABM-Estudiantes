@@ -10,7 +10,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class StudentApiService {
-  private URL_STUDENTS = 'https://62716f5ac455a64564b30a0d.mockapi.io/';
+  private URL_STUDENTS = 'https://62716f5ac455a64564b30a0d.mockapi.io/api/v1/';
 
   constructor(private http: HttpClient) {}
 
