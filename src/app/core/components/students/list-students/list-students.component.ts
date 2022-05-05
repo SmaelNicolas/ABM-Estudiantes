@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Courses } from 'src/app/class/courses';
 import { Student } from 'src/app/class/student';
+import { CoursesApiService } from 'src/app/services/courses-api.service';
 import { CoursesService } from 'src/app/services/courses.service';
 import { StudentApiService } from 'src/app/services/students-api.service';
 
@@ -10,6 +12,8 @@ import { StudentApiService } from 'src/app/services/students-api.service';
 })
 export class ListStudentsComponent implements OnInit {
   students!: Student[];
+  courses!: Courses[];
+  course!: Courses;
   studentSuscriber: any;
   courseSuscriber: any;
 
@@ -25,7 +29,8 @@ export class ListStudentsComponent implements OnInit {
 
   constructor(
     private coursesService: CoursesService,
-    private studentAPIService: StudentApiService
+    private studentAPIService: StudentApiService,
+    private courseAPIService: CoursesApiService
   ) {}
 
   ngOnInit(): void {
@@ -34,21 +39,22 @@ export class ListStudentsComponent implements OnInit {
       .subscribe((data) => {
         this.students = data;
         this.dataSource = this.students;
+        console.log(this.students);
+      });
+    this.courseSuscriber = this.courseAPIService
+      .getCourses()
+      .subscribe((data) => {
+        this.courses = data;
       });
   }
 
   getImage(name: string): string {
-    let dataReturn!: string;
-    this.courseSuscriber = this.coursesService
-      .getCourse(name)
-      .subscribe((data) => {
-        dataReturn = data.imageUrl;
-      });
-    return dataReturn;
+    this.course = this.courses.find((curso) => curso.name === name)!;
+    return this.course.imageUrl;
   }
 
-  // ngOnDestroy(): void {
-  //   this.studentSuscriber.unsubscribe();
-  //   this.courseSuscriber.unsubscribe();
-  // }
+  ngOnDestroy(): void {
+    this.studentSuscriber.unsubscribe();
+    this.courseSuscriber.unsubscribe();
+  }
 }

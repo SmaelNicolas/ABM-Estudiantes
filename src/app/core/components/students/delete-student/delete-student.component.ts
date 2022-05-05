@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -8,7 +8,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 
 import { Student } from 'src/app/class/student';
-import { StudentsService } from 'src/app/services/students.service';
+import { StudentApiService } from 'src/app/services/students-api.service';
 import { DeleteStudentDialogComponent } from '../delete-student-dialog/delete-student-dialog.component';
 
 @Component({
@@ -16,7 +16,7 @@ import { DeleteStudentDialogComponent } from '../delete-student-dialog/delete-st
   templateUrl: './delete-student.component.html',
   styleUrls: ['./delete-student.component.css'],
 })
-export class DeleteStudentComponent implements OnInit, OnDestroy {
+export class DeleteStudentComponent {
   deleteStudentForm!: FormGroup;
   validStudent: boolean = true;
   suscriberStudent!: any;
@@ -24,21 +24,15 @@ export class DeleteStudentComponent implements OnInit, OnDestroy {
   constructor(
     public studentAddForm: FormBuilder,
     public dialog: MatDialog,
-    private studentService: StudentsService
+    private studentAPIService: StudentApiService
   ) {
     this.deleteStudentForm = this.studentAddForm.group({
       id: new FormControl('', [
         Validators.required,
         this.noWhitespaceValidator,
-        Validators.minLength(7),
-        Validators.maxLength(15),
         Validators.pattern('[0-9]*'),
       ]),
     });
-  }
-
-  ngOnInit(): void {
-    this.suscriberStudent = this.studentService.getStudentList().subscribe();
   }
 
   public noWhitespaceValidator(control: FormControl) {
@@ -57,23 +51,22 @@ export class DeleteStudentComponent implements OnInit, OnDestroy {
   }
 
   deleteStudent() {
-    let id: number = parseInt(this.deleteStudentForm.get('id')!.value);
-    let student!: Student;
-    this.studentService.getStudent(id).subscribe((data) => (student = data));
-
-    if (student !== undefined) {
-      this.studentService.deleteStudent(id);
-      this.openDialog(student);
-      this.deleteStudentForm.reset();
-    } else {
-      this.validStudent = false;
-      setTimeout(() => {
-        this.validStudent = true;
-      }, 3000);
-    }
-  }
-
-  ngOnDestroy(): void {
-    this.suscriberStudent.unsubscribe();
+    let id: number = this.deleteStudentForm.get('id')!.value;
+    let student: Student | undefined;
+    this.studentAPIService.getStudent(id).subscribe(
+      (data) => {
+        student = data;
+        this.studentAPIService.deleteStudent(id).subscribe();
+        this.openDialog(student);
+        this.deleteStudentForm.reset();
+      },
+      () => {
+        student = undefined;
+        this.validStudent = false;
+        setTimeout(() => {
+          this.validStudent = true;
+        }, 3000);
+      }
+    );
   }
 }

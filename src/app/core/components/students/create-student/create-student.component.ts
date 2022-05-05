@@ -11,8 +11,8 @@ import { Student } from 'src/app/class/student';
 import { Courses } from 'src/app/class/courses';
 import { CreateStudentDialogComponent } from '../create-student-dialog/create-student-dialog.component';
 
-import { CoursesService } from 'src/app/services/courses.service';
 import { StudentApiService } from 'src/app/services/students-api.service';
+import { CoursesApiService } from 'src/app/services/courses-api.service';
 
 @Component({
   selector: 'app-create-student',
@@ -30,8 +30,8 @@ export class CreateStudentComponent implements OnInit, OnDestroy {
   constructor(
     public studentAddForm: FormBuilder,
     public dialog: MatDialog,
-    private courseService: CoursesService,
-    private studentAPIService: StudentApiService
+    private studentAPIService: StudentApiService,
+    private courseAPIService: CoursesApiService
   ) {
     this.createStudentForm = this.studentAddForm.group({
       id: new FormControl('', [
@@ -73,15 +73,14 @@ export class CreateStudentComponent implements OnInit, OnDestroy {
         this.studentList$ = data;
       });
 
-    this.suscriberCourses = this.courseService
-      .getCoursesList()
+    this.suscriberCourses = this.courseAPIService
+      .getCourses()
       .subscribe((data) => {
         this.coursesList$ = data;
         this.coursesAvailablesList$ = data.filter(
           (course) => course.isAvailable === true
         );
       });
-    console.log(this.coursesAvailablesList$);
   }
   noWhitespaceValidator(control: FormControl) {
     let isWhitespace = (control.value || '').trim().length === 0;
@@ -112,21 +111,33 @@ export class CreateStudentComponent implements OnInit, OnDestroy {
 
   saveStudent(): void {
     let studentToAdd: Student = this.createStudent();
-    this.studentAPIService.saveStudent(studentToAdd);
+    this.studentAPIService
+      .saveStudent({
+        id: undefined,
+        courses: studentToAdd.courses,
+        rol: studentToAdd.rol,
+        name: studentToAdd.name,
+        lastName: studentToAdd.lastName,
+        email: studentToAdd.email,
+        password: studentToAdd.password,
+        dni: studentToAdd.id,
+      })
+      .subscribe();
     this.openDialog(studentToAdd);
     this.createStudentForm.reset();
   }
 
   createStudent(): Student {
-    let dni: number = parseInt(this.getValueFromForm('id'));
+    let id: number = parseInt(this.getValueFromForm('id'));
     let name: string = this.getValueFromForm('name');
     let lastName: string = this.getValueFromForm('lastName');
     let email: string = this.getValueFromForm('email');
     let password: string =
       this.getValueFromForm('lastName') + this.getValueFromForm('id');
     let courses: string = this.getValueFromForm('course').name;
-    let rol: string = 'student';
-    return new Student(dni, name, lastName, email, password, courses);
+    let dni: number = parseInt(this.getValueFromForm('id'));
+
+    return new Student(dni, name, lastName, email, password, courses, dni);
   }
 
   getValueFromForm(value: string) {

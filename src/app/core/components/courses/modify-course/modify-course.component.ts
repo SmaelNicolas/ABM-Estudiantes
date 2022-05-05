@@ -6,8 +6,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscriber, Subscription } from 'rxjs';
 import { Courses } from 'src/app/class/courses';
-import { CoursesService } from 'src/app/services/courses.service';
+import { Student } from 'src/app/class/student';
+import { CoursesApiService } from 'src/app/services/courses-api.service';
+import { StudentApiService } from 'src/app/services/students-api.service';
 import { ModifyCourseDialogComponent } from '../modify-course-dialog/modify-course-dialog.component';
 
 @Component({
@@ -17,13 +20,16 @@ import { ModifyCourseDialogComponent } from '../modify-course-dialog/modify-cour
 })
 export class ModifyCourseComponent implements OnInit, OnDestroy {
   courseList!: Courses[];
+  studentList!: Student[];
   createNewCourseForm!: FormGroup;
-  courseSuscriber: any;
+  show: boolean = false;
+  subscription!: Subscription;
 
   constructor(
     public courseAddForm: FormBuilder,
     public dialog: MatDialog,
-    private coursesService: CoursesService
+    private coursesAPIService: CoursesApiService,
+    private studentAPIService: StudentApiService
   ) {
     this.createNewCourseForm = this.courseAddForm.group({
       name: new FormControl('', [
@@ -46,8 +52,14 @@ export class ModifyCourseComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.courseSuscriber = this.coursesService
-      .getCoursesList()
+    this.subscription = this.studentAPIService
+      .getStudents()
+      .subscribe((data) => {
+        this.studentList = data;
+      });
+
+    this.subscription = this.coursesAPIService
+      .getCourses()
       .subscribe((data) => {
         this.courseList = data;
       });
@@ -69,39 +81,41 @@ export class ModifyCourseComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteCourse(course: string) {
-    if (this.canDeleteCourse(course)) {
-      this.coursesService.deleteCourse(course);
-      this.coursesService.getCoursesList().subscribe((data) => {
-        this.courseList = data;
-      });
-      this.openDialog('Curso Eliminado Correctamente', course, 'delete');
+  deleteCourse(course: Courses) {
+    if (this.coursesAPIService.canDeleteCourse(course.name, this.studentList)) {
+      this.subscription = this.coursesAPIService
+        .deleteCourse(course.id)
+        .subscribe();
+      this.openDialog('Curso Eliminado Correctamente', course.name, 'delete');
     } else {
-      this.openDialog('No es posible eliminar el curso', course, 'noDelete');
+      this.openDialog(
+        'No es posible eliminar el curso',
+        course.name,
+        'noDelete'
+      );
     }
   }
-  changeAvailability(course: string): void {
-    this.coursesService.changeCourseAvailability(course);
-    this.coursesService.getCoursesList().subscribe((data) => {
-      this.courseList = data;
-    });
+  changeAvailability(course: Courses): void {
+    course.isAvailable
+      ? (course.isAvailable = false)
+      : (course.isAvailable = true);
+    this.subscription = this.coursesAPIService
+      .updateCourse(course, course.id)
+      .subscribe();
     this.openDialog(
       'Se ha modificado la disponibilidad del curso',
-      course,
+      course.name,
       'availability'
     );
   }
 
-  canDeleteCourse(course: string): boolean {
-    return this.coursesService.canDeleteCourse(course);
-  }
-
   addNewCourse() {
     let newCourse: Courses = this.createNewCourse();
-    this.coursesService.addCourse(newCourse);
-    this.coursesService.getCoursesList().subscribe((data) => {
-      this.courseList = data;
-    });
+    console.log(newCourse);
+    this.subscription = this.coursesAPIService
+      .saveCourse(newCourse)
+      .subscribe();
+    this.createNewCourseForm.reset();
   }
 
   createNewCourse(): Courses {
@@ -109,11 +123,12 @@ export class ModifyCourseComponent implements OnInit, OnDestroy {
       this.createNewCourseForm.get('name')!.value,
       this.createNewCourseForm.get('description')!.value,
       this.createNewCourseForm.get('imageUrl')!.value,
-      this.createNewCourseForm.get('isAvailable')!.value
+      this.createNewCourseForm.get('isAvailable')!.value,
+      undefined
     );
   }
 
   ngOnDestroy(): void {
-    this.courseSuscriber.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }
