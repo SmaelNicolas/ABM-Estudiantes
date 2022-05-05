@@ -3,25 +3,21 @@
     <form [formGroup]="deleteStudentForm" class="formContainer" (ngSubmit)="deleteStudent()">
         <div>
             <mat-form-field appearance="fill">
-                <mat-label for="id">Documento</mat-label>
+                <mat-label for="id">ID</mat-label>
                 <input matInput type="text" id="id" formControlName="id">
 
-                <mat-error *ngIf="deleteStudentForm.get('id')?.errors?.['required']" selected>Documento es
+                <mat-error *ngIf="deleteStudentForm.get('id')?.errors?.['required']" selected>ID es
                     requerido</mat-error>
                 <mat-error *ngIf="deleteStudentForm.get('id')?.errors?.['whitespace']" selected>
-                    Documento no puede ser vacio</mat-error>
-                <mat-error *ngIf="deleteStudentForm.get('id')?.errors?.['minlength']" selected>Documento es
-                    menor a 7 numeros</mat-error>
-                <mat-error *ngIf="deleteStudentForm.get('id')?.errors?.['maxlength']" selected>Documento es
-                    mayor a 15 numeros</mat-error>
-                <mat-error *ngIf="deleteStudentForm.get('id')?.errors?.['pattern']" selected>Documento debe ser solo
+                    ID no puede ser vacio</mat-error>
+                <mat-error *ngIf="deleteStudentForm.get('id')?.errors?.['pattern']" selected>ID debe ser solo
                     numeros</mat-error>
                 <mat-hint *ngIf="!validStudent">No existe estudiante con ese ID</mat-hint>
 
             </mat-form-field>
         </div>
-        <button mat-raised-button color="primary" type="submit" (click)="deleteStudent()"
-            [disabled]="!deleteStudentForm.valid">DAR DE BAJA</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]=" !deleteStudentForm.valid">DAR DE
+            BAJA</button>
     </form>
 
 </div>

@@ -3,7 +3,7 @@
 <div mat-dialog-content>Email: {{data.email}} </div>
 <div mat-dialog-content>DNI: {{ data.id }} </div>
 <div mat-dialog-content>Inscripto en
-    <span mat-dialog-content *ngFor="let course of data.course">{{course }}</span>
+    <div mat-dialog-content *ngFor="let course of data.course">{{course }}</div>
 </div>
 <div mat-dialog-actions>
     <button mat-button mat-dialog-close>Cerrar</button>

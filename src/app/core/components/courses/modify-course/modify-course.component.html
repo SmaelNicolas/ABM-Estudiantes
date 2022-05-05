@@ -4,12 +4,12 @@
 
     <mat-list class="courseListModify" *ngFor="let course of courseList">
         <mat-list-item class="courseListModifyName">{{course.name | uppercase}}</mat-list-item>
-        <mat-icon class="courseListModifyDelete" color="warn" (click)="deleteCourse(course.name)">delete
+        <mat-icon class="courseListModifyDelete" color="warn" (click)="deleteCourse(course)">delete
         </mat-icon>
         <button class="buttonModifyCourseAvailable" mat-raised-button color="accent" *ngIf="course.isAvailable"
-            (click)="changeAvailability(course.name)">Desabilitar Curso</button>
+            (click)="changeAvailability(course)">Desabilitar Curso</button>
         <button class="buttonModifyCourseAvailable" mat-raised-button color="primary" *ngIf="!course.isAvailable"
-            (click)="changeAvailability(course.name)">Habilitar Curso</button>
+            (click)="changeAvailability(course)">Habilitar Curso</button>
 
 
         <mat-divider></mat-divider>
