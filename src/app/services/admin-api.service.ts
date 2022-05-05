@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Admin } from '../class/admin';
+import { Student } from '../class/student';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { StudentInterface } from '../interfaces/student';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AdminApiService {
-  private URL_ADMINS = 'https://62716f5ac455a64564b30a0d.mockapi.io/api/v1/';
+export class StudentApiService {
+  private URL_STUDENTS = 'https://62716f5ac455a64564b30a0d.mockapi.io/api/v1/';
 
   constructor(private http: HttpClient) {}
 
@@ -33,29 +34,35 @@ export class AdminApiService {
     return throwError('Error de comunicación Http');
   }
 
-  getAdmins(): Observable<Admin[]> {
+  getStudents(): Observable<Student[]> {
     return this.http
-      .get<Admin[]>(this.URL_ADMINS + 'admin')
+      .get<Student[]>(this.URL_STUDENTS + 'students')
       .pipe(catchError(this.handleError));
   }
-  getAdmin(id: number): Observable<Admin> {
+  getStudent(id: number): Observable<Student> {
     return this.http
-      .get<Admin>(this.URL_ADMINS + 'admin/' + id)
+      .get<Student>(this.URL_STUDENTS + 'students/' + id)
       .pipe(catchError(this.handleError));
   }
-  saveAdmin(admin: Admin) {
+
+  saveStudent(student: Student) {
     return this.http
-      .post<Admin>(this.URL_ADMINS + 'admin/', admin, this.getHttpOptions())
+      .post<Student>(
+        this.URL_STUDENTS + 'students/',
+        student,
+        this.getHttpOptions()
+      )
       .pipe(catchError(this.handleError));
   }
-  updateAdmin(admin: Admin, id: number) {
+  updateStudent(student: Student, id: number | undefined) {
     return this.http
-      .put<Admin>(this.URL_ADMINS + id, admin)
+      .put<Student>(this.URL_STUDENTS + 'students/' + id, student)
       .pipe(catchError(this.handleError));
   }
-  deleteAdmin(id: number) {
+
+  deleteStudent(id: number) {
     return this.http
-      .delete<Admin>(this.URL_ADMINS + 'admin/' + id)
+      .delete<Student>(this.URL_STUDENTS + 'students/' + id)
       .pipe(catchError(this.handleError));
   }
 }

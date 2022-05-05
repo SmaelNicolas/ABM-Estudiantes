@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AutenticacionService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-navbar-lateral',
@@ -9,10 +10,13 @@ export class NavbarLateralComponent implements OnInit {
   events: string[] = [];
   opened: boolean = false;
   start: boolean = true;
+  show!: boolean;
 
-  constructor() {}
+  constructor(private adminService: AutenticacionService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.show = this.adminService.getUserIn().rol === 'admin';
+  }
 
   open() {
     this.opened = true;

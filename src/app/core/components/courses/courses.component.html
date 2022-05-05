@@ -9,7 +9,7 @@
                 </p>
             </ng-template>
         </mat-tab>
-        <mat-tab>
+        <mat-tab *ngIf="show">
             <ng-template mat-tab-label>
                 <p [routerLink]="'modificar'" class="sections">
                     <mat-icon color="primary" class="sectionIcon">create</mat-icon> <span class="sectionText">

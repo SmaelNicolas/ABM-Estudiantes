@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AutenticacionService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-courses',
@@ -6,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./courses.component.css'],
 })
 export class CoursesComponent implements OnInit {
-  constructor() {}
+  show!: boolean;
+  constructor(private adminService: AutenticacionService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.show = this.adminService.getUserIn().rol === 'admin';
+  }
 }
