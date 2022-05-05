@@ -1,7 +1,6 @@
 export interface AdminInterface {
-  id: number;
-  name: string;
-  lastName: string;
+  id: number | undefined;
   email: string;
   password: string;
+  rol: string;
 }
