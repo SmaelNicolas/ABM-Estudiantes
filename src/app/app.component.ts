@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'ProyectoFinal';
   router!: string;
 
   constructor(private _router: Router) {}
