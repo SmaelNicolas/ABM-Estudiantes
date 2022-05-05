@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Courses } from 'src/app/class/courses';
 import { Student } from 'src/app/class/student';
 import { CoursesApiService } from 'src/app/services/courses-api.service';
-import { CoursesService } from 'src/app/services/courses.service';
 import { StudentApiService } from 'src/app/services/students-api.service';
 
 @Component({
@@ -28,7 +27,6 @@ export class ListStudentsComponent implements OnInit {
   dataSource!: Student[];
 
   constructor(
-    private coursesService: CoursesService,
     private studentAPIService: StudentApiService,
     private courseAPIService: CoursesApiService
   ) {}

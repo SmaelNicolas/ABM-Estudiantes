@@ -7,8 +7,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarLateralComponent } from './core/components/navbar-lateral/navbar-lateral.component';
 import { ToolbarComponent } from './core/components/toolbar/toolbar.component';
-import { StudentsService } from './services/students.service';
-import { CoursesService } from './services/courses.service';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModulesModule } from './core/material/material-modules.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
@@ -34,7 +32,7 @@ import { HomeComponent } from './core/components/home/home.component';
     SweetAlert2Module,
     HttpClientModule,
   ],
-  providers: [StudentsService, CoursesService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

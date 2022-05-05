@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { Courses } from 'src/app/class/courses';
 import { Student } from 'src/app/class/student';
-import { CoursesService } from 'src/app/services/courses.service';
+import { CoursesApiService } from 'src/app/services/courses-api.service';
 import { StudentApiService } from 'src/app/services/students-api.service';
 import { ModifyStudentDialogComponent } from '../modify-student-dialog/modify-student-dialog.component';
 
@@ -35,8 +35,8 @@ export class ModifyStudentComponent implements OnInit, OnDestroy {
     public studentModifyForm: FormBuilder,
     public newCoursesModifyForm: FormBuilder,
     public dialog: MatDialog,
-    private coursesService: CoursesService,
-    private studentAPIService: StudentApiService
+    private studentAPIService: StudentApiService,
+    private courseAPIService: CoursesApiService
   ) {
     this.checkStudentForm = this.studentCheckForm.group({
       id: new FormControl('', [
@@ -76,8 +76,8 @@ export class ModifyStudentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.courseSuscriber = this.coursesService
-      .getCoursesList()
+    this.courseSuscriber = this.courseAPIService
+      .getCourses()
       .subscribe((courses) => {
         this.courses = courses;
       });
