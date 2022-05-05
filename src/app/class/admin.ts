@@ -1,6 +1,4 @@
-import { Person } from '../interfaces/person';
-
-export class Admin implements Person {
+export class Admin {
   id: number;
   name: string;
   lastName: string;

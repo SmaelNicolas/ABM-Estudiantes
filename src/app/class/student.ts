@@ -1,12 +1,14 @@
-import { Person } from '../interfaces/person';
+import { StudentInterface } from '../interfaces/student';
 
-export class Student implements Person {
-  id: number;
+export class Student implements StudentInterface {
+  id: number | undefined;
   name: string;
   lastName: string;
   email: string;
   password: string;
   courses: string[] = [];
+  rol: string;
+  dni: number | undefined;
 
   constructor(
     id: number,
@@ -14,7 +16,8 @@ export class Student implements Person {
     lastName: string,
     email: string,
     password: string,
-    course: string
+    course: string,
+    dni: number
   ) {
     this.id = id;
     this.name = name;
@@ -22,5 +25,7 @@ export class Student implements Person {
     this.email = email;
     this.password = password;
     this.courses.push(course);
+    this.rol = 'student';
+    this.dni = dni;
   }
 }
