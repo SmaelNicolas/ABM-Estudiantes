@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Student } from '../class/student';
 
 @Injectable({
   providedIn: 'root',
@@ -52,14 +53,22 @@ export class CoursesApiService {
       )
       .pipe(catchError(this.handleError));
   }
-  updateCourse(course: Courses, id: number) {
+  updateCourse(course: Courses, id: number | undefined) {
     return this.http
-      .put<Courses>(this.URL_COURSES + id, course)
+      .put<Courses>(this.URL_COURSES + 'courses/' + id, course)
       .pipe(catchError(this.handleError));
   }
-  deleteCourse(id: number) {
+  deleteCourse(id: number | undefined) {
     return this.http
       .delete<Courses>(this.URL_COURSES + 'courses/' + id)
       .pipe(catchError(this.handleError));
+  }
+
+  canDeleteCourse(courseName: string, studentList: Student[]): boolean {
+    let isInCourse: boolean = false;
+    studentList.forEach((student) => {
+      student.courses.includes(courseName) ? (isInCourse = true) : null;
+    });
+    return !isInCourse;
   }
 }

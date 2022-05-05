@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { StudentInterface } from '../interfaces/student';
 
 @Injectable({
   providedIn: 'root',
@@ -43,8 +44,8 @@ export class StudentApiService {
       .get<Student>(this.URL_STUDENTS + 'students/' + id)
       .pipe(catchError(this.handleError));
   }
+
   saveStudent(student: Student) {
-    console.log(student);
     return this.http
       .post<Student>(
         this.URL_STUDENTS + 'students/',
@@ -55,10 +56,11 @@ export class StudentApiService {
   }
   updateStudent(student: Student, id: number | undefined) {
     return this.http
-      .put<Student>(this.URL_STUDENTS + id, student)
+      .put<Student>(this.URL_STUDENTS + 'students/' + id, student)
       .pipe(catchError(this.handleError));
   }
-  deleteStudent(id: number | undefined) {
+
+  deleteStudent(id: number) {
     return this.http
       .delete<Student>(this.URL_STUDENTS + 'students/' + id)
       .pipe(catchError(this.handleError));
