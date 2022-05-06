@@ -37,7 +37,6 @@ export class ListStudentsComponent implements OnInit {
       .subscribe((data) => {
         this.students = data;
         this.dataSource = this.students;
-        console.log(this.students);
       });
     this.courseSuscriber = this.courseAPIService
       .getCourses()

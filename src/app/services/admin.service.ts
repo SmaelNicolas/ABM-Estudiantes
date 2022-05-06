@@ -7,7 +7,7 @@ export class AutenticacionService {
   private userIn = {
     email: '',
     pw: '',
-    rol: 'student',
+    rol: '',
   };
   private sesionActive = true;
 
@@ -17,7 +17,7 @@ export class AutenticacionService {
     return this.userIn;
   }
 
-  updateUserIn(email: string, pw: string, rol: string) {
+  updateUserIn(email: any, pw: any, rol: any) {
     this.userIn.email = email;
     this.userIn.pw = pw;
     this.userIn.rol = rol;

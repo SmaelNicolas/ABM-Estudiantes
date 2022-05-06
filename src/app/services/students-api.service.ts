@@ -5,7 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { StudentInterface } from '../interfaces/student';
+import Swal from 'sweetalert2/dist/sweetalert2.all.js';
 
 @Injectable({
   providedIn: 'root',
@@ -25,11 +25,17 @@ export class StudentApiService {
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
-      alert('Error de Frontend:' + error.error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Algo salio mal',
+      });
     } else {
-      alert(
-        `Error de Backend: ${error.status}, cuerpo del error: ${error.message}`
-      );
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No existe un Estudiante con ese EMAIL / ID',
+      });
     }
     return throwError('Error de comunicación Http');
   }
@@ -42,6 +48,11 @@ export class StudentApiService {
   getStudent(id: number): Observable<Student> {
     return this.http
       .get<Student>(this.URL_STUDENTS + 'students/' + id)
+      .pipe(catchError(this.handleError));
+  }
+  getStudentEmail(email: string): Observable<Student> {
+    return this.http
+      .get<Student>(this.URL_STUDENTS + 'students?email=' + email)
       .pipe(catchError(this.handleError));
   }
 

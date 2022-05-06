@@ -2,7 +2,7 @@
 
     <h2 appTitleFontSize>Iniciar Sesion</h2>
 
-    <form (ngSubmit)="createUser()" [formGroup]="loginForm" class="formContainer">
+    <form [formGroup]="loginForm" class="formContainer">
 
         <div>
             <mat-form-field appearance="fill">
@@ -10,7 +10,6 @@
                 <input matInput type="email" id="email" formControlName="email">
                 <mat-error *ngIf="loginForm.get('email')?.errors?.['required']" selected>Email es
                     requerido</mat-error>
-                <mat-hint>Momentaneamente no se requiere email para iniciar sesion</mat-hint>
                 <mat-error *ngIf="loginForm.get('email')?.errors?.['whitespace']" selected>
                     Email
                     no puede ser vacio</mat-error>
@@ -24,7 +23,6 @@
             <mat-form-field appearance="fill">
                 <mat-label for="password">Contraseña</mat-label>
                 <input matInput type="password" id="password" formControlName="password">
-                <mat-hint>Momentaneamente no se requiere constraseña para iniciar sesion</mat-hint>
                 <mat-error *ngIf="loginForm.get('password')?.errors?.['required']" selected>
                     Contraseña es
                     requerido</mat-error>

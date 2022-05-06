@@ -23,11 +23,9 @@ export class AdminGuard implements CanActivate {
     } else {
       Swal.fire({
         title: 'No tenes permisos para acceder',
-        text: 'Queres logearte como Admin?',
+        text: 'Debes logearte como ADMINISTRADOR para acceder',
         icon: 'warning',
-        showCancelButton: true,
         confirmButtonText: 'Log In',
-        cancelButtonText: 'Cancel',
       }).then((result) => {
         if (result.value) {
           this.router.navigate(['login']);

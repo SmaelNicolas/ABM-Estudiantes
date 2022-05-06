@@ -111,7 +111,6 @@ export class ModifyCourseComponent implements OnInit, OnDestroy {
 
   addNewCourse() {
     let newCourse: Courses = this.createNewCourse();
-    console.log(newCourse);
     this.subscription = this.coursesAPIService
       .saveCourse(newCourse)
       .subscribe();

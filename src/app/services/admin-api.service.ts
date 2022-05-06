@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Student } from '../class/student';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { StudentInterface } from '../interfaces/student';
+import { Admin } from '../class/admin';
+import Swal from 'sweetalert2/dist/sweetalert2.all.js';
 
 @Injectable({
   providedIn: 'root',
 })
-export class StudentApiService {
-  private URL_STUDENTS = 'https://62716f5ac455a64564b30a0d.mockapi.io/api/v1/';
+export class AdminApiService {
+  private URL_ADMIN = 'https://62716f5ac455a64564b30a0d.mockapi.io/api/v1/';
 
   constructor(private http: HttpClient) {}
 
@@ -25,44 +25,51 @@ export class StudentApiService {
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
-      alert('Error de Frontend:' + error.error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Algo salio mal',
+      });
     } else {
-      alert(
-        `Error de Backend: ${error.status}, cuerpo del error: ${error.message}`
-      );
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No existe un ADMINISTRADOR con ese EMAIL',
+      });
     }
     return throwError('Error de comunicación Http');
   }
 
-  getStudents(): Observable<Student[]> {
+  getAdmins(): Observable<Admin[]> {
     return this.http
-      .get<Student[]>(this.URL_STUDENTS + 'students')
+      .get<Admin[]>(this.URL_ADMIN + 'admin')
       .pipe(catchError(this.handleError));
   }
-  getStudent(id: number): Observable<Student> {
+  getAdmin(id: number): Observable<Admin> {
     return this.http
-      .get<Student>(this.URL_STUDENTS + 'students/' + id)
+      .get<Admin>(this.URL_ADMIN + 'admin/' + id)
+      .pipe(catchError(this.handleError));
+  }
+  getAdminEmail(email: string): Observable<Admin> {
+    return this.http
+      .get<Admin>(this.URL_ADMIN + 'admin?email=' + email)
       .pipe(catchError(this.handleError));
   }
 
-  saveStudent(student: Student) {
+  saveStudent(admin: Admin) {
     return this.http
-      .post<Student>(
-        this.URL_STUDENTS + 'students/',
-        student,
-        this.getHttpOptions()
-      )
+      .post<Admin>(this.URL_ADMIN + 'admin/', admin, this.getHttpOptions())
       .pipe(catchError(this.handleError));
   }
-  updateStudent(student: Student, id: number | undefined) {
+  updateStudent(admin: Admin, id: number | undefined) {
     return this.http
-      .put<Student>(this.URL_STUDENTS + 'students/' + id, student)
+      .put<Admin>(this.URL_ADMIN + 'admin/' + id, admin)
       .pipe(catchError(this.handleError));
   }
 
   deleteStudent(id: number) {
     return this.http
-      .delete<Student>(this.URL_STUDENTS + 'students/' + id)
+      .delete<Admin>(this.URL_ADMIN + 'admin/' + id)
       .pipe(catchError(this.handleError));
   }
 }

@@ -6,6 +6,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Student } from '../class/student';
+import Swal from 'sweetalert2/dist/sweetalert2.all.js';
 
 @Injectable({
   providedIn: 'root',
@@ -25,11 +26,17 @@ export class CoursesApiService {
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
-      alert('Error de Frontend:' + error.error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Algo salio mal, pruebe denuevo.',
+      });
     } else {
-      alert(
-        `Error de Backend: ${error.status}, cuerpo del error: ${error.message}`
-      );
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Error en la base de datos',
+      });
     }
     return throwError('Error de comunicación Http');
   }
