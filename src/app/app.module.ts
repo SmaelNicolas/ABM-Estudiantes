@@ -13,6 +13,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { LoginComponent } from './core/components/login/login.component';
 import { LoadingScreenComponent } from './core/components/loading-screen/loading-screen.component';
 import { HomeComponent } from './core/components/home/home.component';
+import { StoreModule } from '@ngrx/store';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import { HomeComponent } from './core/components/home/home.component';
     AppRoutingModule,
     SweetAlert2Module,
     HttpClientModule,
+    StoreModule.forRoot({}, {}),
   ],
   providers: [],
   bootstrap: [AppComponent],
