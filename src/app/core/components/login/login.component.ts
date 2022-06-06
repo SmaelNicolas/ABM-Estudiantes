@@ -103,9 +103,6 @@ export class LoginComponent implements OnInit {
       didOpen: () => {
         Swal.showLoading();
         const b: any = Swal.getHtmlContainer()!.querySelector('b');
-        timerInterval = setInterval(() => {
-          b.textContent = Swal.getTimerLeft();
-        }, 100);
       },
       willClose: () => {
         clearInterval(timerInterval);
