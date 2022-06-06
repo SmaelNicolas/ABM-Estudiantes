@@ -7,12 +7,14 @@ import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Student } from '../class/student';
 import Swal from 'sweetalert2/dist/sweetalert2.all.js';
+import { Course } from '../models/course';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoursesApiService {
-  private URL_COURSES = 'https://62716f5ac455a64564b30a0d.mockapi.io/api/v1/';
+  private readonly URL_COURSES =
+    'https://62716f5ac455a64564b30a0d.mockapi.io/api/v1/';
 
   constructor(private http: HttpClient) {}
 
@@ -41,9 +43,9 @@ export class CoursesApiService {
     return throwError('Error de comunicación Http');
   }
 
-  getCourses(): Observable<Courses[]> {
+  getCourses() {
     return this.http
-      .get<Courses[]>(this.URL_COURSES + 'courses')
+      .get<Course[]>(this.URL_COURSES + 'courses')
       .pipe(catchError(this.handleError));
   }
   getCourse(id: number): Observable<Courses> {
