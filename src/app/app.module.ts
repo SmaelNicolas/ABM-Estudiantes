@@ -14,6 +14,10 @@ import { LoginComponent } from './core/components/login/login.component';
 import { LoadingScreenComponent } from './core/components/loading-screen/loading-screen.component';
 import { HomeComponent } from './core/components/home/home.component';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { CoursesApiService } from './services/courses-api.service';
+import { ROOT_REDUCERS } from './state/app.state';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,9 +36,14 @@ import { StoreModule } from '@ngrx/store';
     AppRoutingModule,
     SweetAlert2Module,
     HttpClientModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(ROOT_REDUCERS),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+      name: 'NGRX Cursos',
+    }),
   ],
-  providers: [],
+  providers: [CoursesApiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
